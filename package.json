@@ -2,6 +2,7 @@
   "name": "fakeinsta",
   "version": "1.0.0",
   "description": "fake instagram OOP app",
+    "browserslist": "> 2.0%, last 2 versions, not dead",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",

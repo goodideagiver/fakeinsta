@@ -1,0 +1,1 @@
+{"mappings":";ACEA;;;;;ADCA","sources":["src/assets/style/main.scss","src/assets/style/misc/body.scss"],"sourcesContent":["@use 'misc/variables.scss';\r\n@use 'misc/body.scss';\r\n\r\n* {\r\n\tbox-sizing: border-box;\r\n}\r\n",null],"names":[],"version":3,"file":"index.33e4f694.css.map","sourceRoot":"/__parcel_source_root/"}

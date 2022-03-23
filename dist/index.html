@@ -8,5 +8,62 @@
 		<title>Fake insta</title>
 		<link rel="stylesheet" href="/index.33e4f694.css">
 	</head>
-	<body></body>
+	<body>
+		<div id="app">
+			<nav class="main-nav">
+				<section class="logo">
+					<h1>fakeinsta</h1>
+				</section>
+				<section class="nav-btns">
+					<button id="add-post-btn" class="add">+</button>
+					<button class="like-history-button">❤️</button>
+					<button class="messages-button">💬</button>
+				</section>
+			</nav>
+			<nav class="nav-bottom">
+				<button id="home-btn">home</button>
+				<button>search</button>
+				<button>tiktok</button>
+				<button>scam</button>
+				<button>profile</button>
+			</nav>
+		</div>
+		<template id="gallery-template">
+			<div class="gallery">
+				<button class="button-cancel-gallery"></button>
+				<main class="gallery-grid"></main>
+			</div>
+		</template>
+		<template id="post-template">
+			<div class="post">
+				<div class="post-top-bar">
+					<button class="button-post-option">...</button>
+				</div>
+				<main class="post-photo"></main>
+				<div class="post-bottom-segment">
+					<section class="post-buttons">
+						<div class="buttons-left">
+							<button class="like">❤️</button>
+							<button class="comment">💬</button>
+							<button class="share">📨</button>
+						</div>
+						<div class="buttons-right">
+							<button class="save">🔖</button>
+						</div>
+					</section>
+					<section class="counter">
+						<p class="like-count">50 likes</p>
+					</section>
+					<section class="post-desc">
+						<p class="description">
+							Lorem ipsum dolor sit amet consectetur adipisicing elit.
+							Aliquid reprehenderit iusto aspernatur consequuntur
+							accusantium quia nam vel eos, omnis quaerat doloribus quos
+							modi nemo dolorem illo asperiores est amet. Dolorum.
+						</p>
+					</section>
+				</div>
+			</div>
+		</template>
+	</body>
 </html>

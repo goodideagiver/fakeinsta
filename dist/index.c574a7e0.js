@@ -616,10 +616,12 @@ class Scroll {
             new _postJs.Post().addRandomPost();
             this.lastFireEvent = Date.now();
             return;
-        }
+        } else if (this.feedConatainer.scrollTop > maxHeight - 500) setTimeout(()=>{
+            this.feedScrollHandler();
+        }, 500);
     }
 }
 
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","../post/Post.js":"dfYSB"}]},["2G3IT","gJRPm"], "gJRPm", "parcelRequireab7b")
+},{"../post/Post.js":"dfYSB","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}]},["2G3IT","gJRPm"], "gJRPm", "parcelRequireab7b")
 
 //# sourceMappingURL=index.c574a7e0.js.map

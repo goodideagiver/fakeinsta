@@ -23,6 +23,10 @@ export class Scroll {
 			new Post().addRandomPost();
 			this.lastFireEvent = Date.now();
 			return;
+		} else if (this.feedConatainer.scrollTop > maxHeight - 500) {
+			setTimeout(() => {
+				this.feedScrollHandler();
+			}, 500);
 		}
 	}
 }

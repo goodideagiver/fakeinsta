@@ -39,18 +39,24 @@
 		summary {
 			display: flex;
 			align-items: baseline;
-			gap: 10px;
+			gap: 0.3rem;
 			* {
 				font-size: 1rem;
 			}
 			h2 {
-				font-size: 1.2rem;
+				font-size: 1rem;
 			}
-			span {
-				color: $c-gray-text;
+			p {
+				color: rgba($color: $c-main-font-icon, $alpha: 0.6);
 			}
-			button {
-				font-weight: bold;
+		}
+		details[open] {
+			margin: 10px 0;
+			summary {
+				span,
+				p {
+					display: none;
+				}
 			}
 		}
 	}

@@ -104,24 +104,24 @@ button {
 
 .post .post-desc summary {
   align-items: baseline;
-  gap: 10px;
+  gap: .3rem;
   display: flex;
 }
 
-.post .post-desc summary * {
+.post .post-desc summary *, .post .post-desc summary h2 {
   font-size: 1rem;
 }
 
-.post .post-desc summary h2 {
-  font-size: 1.2rem;
+.post .post-desc summary p {
+  color: #02020299;
 }
 
-.post .post-desc summary span {
-  color: #bfbfbf;
+.post .post-desc details[open] {
+  margin: 10px 0;
 }
 
-.post .post-desc summary button {
-  font-weight: bold;
+.post .post-desc details[open] summary span, .post .post-desc details[open] summary p {
+  display: none;
 }
 
 .post .post-buttons {

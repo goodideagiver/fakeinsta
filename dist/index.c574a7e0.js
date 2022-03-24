@@ -526,6 +526,9 @@ class App {
         for(let index = 0; index < 3; index++)new _postJs.Post().addRandomPost();
     }
 }
+document.getElementById('add-post-btn').addEventListener('click', ()=>{
+    new _postJs.Post().addRandomPost();
+});
 new App();
 
 },{"./post/Post.js":"dfYSB"}],"dfYSB":[function(require,module,exports) {

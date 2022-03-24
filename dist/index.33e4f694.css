@@ -161,6 +161,7 @@ body {
   max-width: 500px;
   max-height: 900px;
   height: 100%;
+  border-radius: 10px;
   position: relative;
   overflow: hidden;
   box-shadow: 0 0 20px #00000059;
@@ -168,8 +169,14 @@ body {
 
 .main-app-window .app-content {
   height: 100%;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
   padding-bottom: 200px;
   overflow-y: auto !important;
+}
+
+.main-app-window .app-content::-webkit-scrollbar {
+  display: none;
 }
 
 /*# sourceMappingURL=index.33e4f694.css.map */

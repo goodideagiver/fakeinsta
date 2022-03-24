@@ -17,4 +17,8 @@ class App {
 	}
 }
 
+document.getElementById('add-post-btn').addEventListener('click', () => {
+	new Post().addRandomPost();
+});
+
 new App();

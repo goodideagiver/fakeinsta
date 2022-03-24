@@ -4,28 +4,35 @@
 		<meta charset="UTF-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<script defer="" src="/index.c574a7e0.js"></script>
+		<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 		<title>Fake insta</title>
+		<script defer="" src="/index.c574a7e0.js"></script>
 		<link rel="stylesheet" href="/index.33e4f694.css">
 	</head>
 	<body>
-		<div id="app">
+		<div class="main-app-window" id="app">
 			<nav class="main-nav">
 				<section class="logo">
 					<h1>fakeinsta</h1>
 				</section>
 				<section class="nav-btns">
-					<button id="add-post-btn" class="add">+</button>
-					<button class="like-history-button">❤️</button>
-					<button class="messages-button">💬</button>
+					<button id="add-post-btn" class="add">
+						<span class="material-icons"> add_circle_outline </span>
+					</button>
+					<button class="like-history-button">
+						<span class="material-icons"> favorite_border </span>
+					</button>
+					<button class="messages-button">
+						<span class="material-icons"> send </span>
+					</button>
 				</section>
 			</nav>
 			<nav class="nav-bottom">
-				<button id="home-btn">home</button>
-				<button>search</button>
-				<button>tiktok</button>
-				<button>scam</button>
-				<button>profile</button>
+				<button id="home-btn"><span class="material-icons"> home </span></button>
+				<button><span class="material-icons"> search </span></button>
+				<button><span class="material-icons"> ondemand_video </span></button>
+				<button><span class="material-icons"> store </span></button>
+				<button><span class="material-icons"> account_circle </span></button>
 			</nav>
 		</div>
 		<template id="gallery-template">
@@ -63,6 +70,16 @@
 						</p>
 					</section>
 				</div>
+			</div>
+		</template>
+		<template id="photo-upload-template">
+			<div class="upload-photo">
+				<nav class="upload-photo-nav-top">
+					<button>Cancel</button>
+					<button>Confirm</button>
+				</nav>
+				<main class="upload-photo-image"></main>
+				<section class="upload-photo-bottom"></section>
 			</div>
 		</template>
 	</body>

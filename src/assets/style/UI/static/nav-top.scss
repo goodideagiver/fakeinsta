@@ -5,4 +5,11 @@
 		font-family: Dancing Script, cursive;
 		font-size: 36px;
 	}
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding: 5px;
+	i {
+		display: block;
+	}
 }

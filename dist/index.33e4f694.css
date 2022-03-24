@@ -5,13 +5,46 @@ body {
   font-size: 16px;
 }
 
+.nav-bottom {
+  width: 100%;
+  grid-template-columns: 20% 20% 20% 20% 20%;
+  display: grid;
+  position: fixed;
+  bottom: 0;
+}
+
+button {
+  cursor: pointer;
+}
+
+.main-nav {
+  justify-content: space-between;
+  align-items: center;
+  padding: 5px;
+  display: flex;
+}
+
 .main-nav h1 {
   font-family: Dancing Script, cursive;
   font-size: 36px;
 }
 
+.main-nav i {
+  display: block;
+}
+
 * {
   box-sizing: border-box;
+  background-color: #0000;
+  border: none;
+  margin: 0;
+  padding: 0;
+}
+
+.main-app-window {
+  max-width: 400px;
+  max-height: 900px;
+  height: 100vh;
 }
 
 /*# sourceMappingURL=index.33e4f694.css.map */

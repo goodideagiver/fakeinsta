@@ -11,8 +11,12 @@ import { Post } from './post/Post.js';
 
 class App {
 	constructor(params) {
-		for (let index = 0; index < 3; index++) {
-			new Post().addRandomPost();
+		this.AddInitialPosts();
+	}
+
+	async AddInitialPosts() {
+		for (let index = 0; index < 10; index++) {
+			await new Post().addRandomPost();
 		}
 	}
 }
@@ -26,7 +30,11 @@ new App();
 const appContent = document.getElementById('app-content');
 
 appContent.addEventListener('scroll', e => {
-	console.log(e.target.scrollTop, e.target.offsetHeight + 500, e.target);
+	console.log(
+		e.target.scrollTop,
+		e.target.offsetHeight + 500,
+		e.target.getBoundingClientRect().bottom
+	);
 	if (appContent.scrollTop > appContent.clientHeight + 200) {
 		console.log('add photo');
 		new Post().addRandomPost();

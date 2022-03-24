@@ -169,7 +169,7 @@ body {
 }
 
 .main-app-window .app-content {
-  height: max-content;
+  height: 100%;
   padding-bottom: 200px;
   overflow-y: scroll;
 }

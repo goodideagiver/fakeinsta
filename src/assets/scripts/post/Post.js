@@ -19,6 +19,6 @@ export class Post {
 		postEl.querySelector('.post-photo img').src = postImageURL;
 		postEl.querySelector('.post-user-img img').src = profileImageURL;
 
-		appFeedHook.append(postEl);
+		await appFeedHook.append(postEl);
 	}
 }

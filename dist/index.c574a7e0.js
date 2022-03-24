@@ -523,7 +523,10 @@ var _postJs = require("./post/Post.js");
 // }
 class App {
     constructor(params){
-        for(let index = 0; index < 3; index++)new _postJs.Post().addRandomPost();
+        this.AddInitialPosts();
+    }
+    async AddInitialPosts() {
+        for(let index = 0; index < 10; index++)await new _postJs.Post().addRandomPost();
     }
 }
 document.getElementById('add-post-btn').addEventListener('click', ()=>{
@@ -532,7 +535,7 @@ document.getElementById('add-post-btn').addEventListener('click', ()=>{
 new App();
 const appContent = document.getElementById('app-content');
 appContent.addEventListener('scroll', (e)=>{
-    console.log(e.target.scrollTop, e.target.offsetHeight + 500, e.target);
+    console.log(e.target.scrollTop, e.target.offsetHeight + 500, e.target.getBoundingClientRect().bottom);
     if (appContent.scrollTop > appContent.clientHeight + 200) {
         console.log('add photo');
         new _postJs.Post().addRandomPost();
@@ -562,7 +565,7 @@ class Post {
         const postEl = this.postTemplateEl.cloneNode(true);
         postEl.querySelector('.post-photo img').src = postImageURL;
         postEl.querySelector('.post-user-img img').src = profileImageURL;
-        appFeedHook.append(postEl);
+        await appFeedHook.append(postEl);
     }
 }
 

@@ -514,10 +514,11 @@ function hmrAcceptRun(bundle, id) {
 }
 
 },{}],"gJRPm":[function(require,module,exports) {
-console.log('hello parcel');
-const test = 123;
-console.log(test);
-console.log('test code new');
+const appFeed = document.getElementById('app-content');
+const postTemplate = document.getElementById('post-template');
+const samplePost = postTemplate.content.cloneNode(true);
+appFeed.append(samplePost);
+console.log(samplePost);
 
 },{}]},["2G3IT","gJRPm"], "gJRPm", "parcelRequireab7b")
 

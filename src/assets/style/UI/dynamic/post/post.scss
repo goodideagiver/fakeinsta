@@ -1,6 +1,7 @@
 @use '../../../misc/variables.scss' as *;
 
 .post {
+	margin-bottom: 30px;
 	width: 100%;
 	.post-top-bar {
 		display: flex;
@@ -31,13 +32,40 @@
 			aspect-ratio: 1/1;
 		}
 	}
+	.post-bottom-segment {
+		padding: 0 2%;
+	}
+	.post-desc {
+		summary {
+			display: flex;
+			align-items: baseline;
+			gap: 10px;
+			* {
+				font-size: 1rem;
+			}
+			h2 {
+				font-size: 1.2rem;
+			}
+			span {
+				color: $c-gray-text;
+			}
+			button {
+				font-weight: bold;
+			}
+		}
+	}
 	.post-buttons {
 		width: 100%;
 		display: flex;
 		justify-content: space-between;
+		padding: 5px 0;
+		.buttons-left {
+			display: flex;
+			gap: 10px;
+		}
 		span {
 			font-size: $icon-button-size;
-			padding: 5px;
+			// padding: 5px;
 		}
 	}
 }

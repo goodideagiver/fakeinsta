@@ -67,6 +67,7 @@ button {
 
 .post {
   width: 100%;
+  margin-bottom: 30px;
 }
 
 .post .post-top-bar {
@@ -97,14 +98,45 @@ button {
   aspect-ratio: 1 / 1;
 }
 
+.post .post-bottom-segment {
+  padding: 0 2%;
+}
+
+.post .post-desc summary {
+  align-items: baseline;
+  gap: 10px;
+  display: flex;
+}
+
+.post .post-desc summary * {
+  font-size: 1rem;
+}
+
+.post .post-desc summary h2 {
+  font-size: 1.2rem;
+}
+
+.post .post-desc summary span {
+  color: #bfbfbf;
+}
+
+.post .post-desc summary button {
+  font-weight: bold;
+}
+
 .post .post-buttons {
   width: 100%;
   justify-content: space-between;
+  padding: 5px 0;
+  display: flex;
+}
+
+.post .post-buttons .buttons-left {
+  gap: 10px;
   display: flex;
 }
 
 .post .post-buttons span {
-  padding: 5px;
   font-size: 2rem;
 }
 
@@ -138,10 +170,6 @@ body {
   height: 100%;
   padding-bottom: 200px;
   overflow-y: auto !important;
-}
-
-.main-app-window .app-content > .post {
-  margin-bottom: 20px 0;
 }
 
 /*# sourceMappingURL=index.33e4f694.css.map */

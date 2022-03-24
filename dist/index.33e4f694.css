@@ -136,7 +136,12 @@ body {
 
 .main-app-window .app-content {
   height: 100%;
+  padding-bottom: 200px;
   overflow-y: auto !important;
+}
+
+.main-app-window .app-content > .post {
+  margin-bottom: 20px 0;
 }
 
 /*# sourceMappingURL=index.33e4f694.css.map */

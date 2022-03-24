@@ -28,5 +28,9 @@ body {
 	.app-content {
 		overflow-y: auto !important;
 		height: 100%;
+		padding-bottom: 200px;
+		> .post {
+			margin-bottom: 20px 0;
+		}
 	}
 }

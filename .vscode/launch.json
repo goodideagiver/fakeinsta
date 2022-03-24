@@ -5,11 +5,15 @@
 	"version": "0.2.0",
 	"configurations": [
 		{
-			"name": "Launch Chrome",
+			"name": "Launch Chrome Private",
 			"request": "launch",
 			"type": "pwa-chrome",
 			"url": "http://localhost:1234",
-			"webRoot": "${workspaceFolder}"
+			"webRoot": "${workspaceFolder}",
+			"sourceMapPathOverrides": {
+				"../*": "${webRoot}/*",
+				"/__parcel_source_root/*": "${webRoot}/*"
+			}
 		}
 	]
 }

@@ -158,11 +158,13 @@ body {
 }
 
 .main-app-window {
-  width: 100%;
-  max-width: 500px;
-  max-height: 900px;
   height: 100%;
+  max-height: 900px;
+  max-width: 500px;
+  width: 100%;
   border-radius: 10px;
+  flex-direction: column;
+  display: flex;
   position: relative;
   overflow: hidden;
   box-shadow: 0 0 20px #00000059;

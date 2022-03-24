@@ -522,11 +522,11 @@ var _postJs = require("./post/Post.js");
 // 	appFeed.append(samplePost);
 // }
 class App {
-    constructor(params){
-        this.AddInitialPosts();
+    constructor(elo){
+        this.addInitialPosts();
     }
-    async AddInitialPosts() {
-        for(let index = 0; index < 10; index++)await new _postJs.Post().addRandomPost();
+    async addInitialPosts() {
+        for(let index = 0; index < 4; index++)await new _postJs.Post().addRandomPost();
     }
 }
 document.getElementById('add-post-btn').addEventListener('click', ()=>{
@@ -534,9 +534,20 @@ document.getElementById('add-post-btn').addEventListener('click', ()=>{
 });
 new App();
 const appContent = document.getElementById('app-content');
+const getPostsHeight = ()=>{
+    const posts = [
+        ...document.querySelectorAll('.post')
+    ];
+    posts.forEach((post, id)=>posts[id] = post.offsetHeight
+    );
+    const height = posts.reduce((prev, curr)=>prev + curr
+    , 0);
+    return height;
+};
 appContent.addEventListener('scroll', (e)=>{
-    console.log(e.target.scrollTop, e.target.offsetHeight + 500, e.target.getBoundingClientRect().bottom);
-    if (appContent.scrollTop > appContent.clientHeight + 200) {
+    const maxHeight = getPostsHeight();
+    console.log(appContent.scrollTop, maxHeight);
+    if (appContent.scrollTop > maxHeight - 500) {
         console.log('add photo');
         new _postJs.Post().addRandomPost();
     }

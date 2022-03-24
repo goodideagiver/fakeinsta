@@ -12,9 +12,13 @@ body {
   border-top: 2px solid #efefef;
   grid-template-columns: 20% 20% 20% 20% 20%;
   display: grid;
-  position: absolute;
+  position: sticky;
   bottom: 0;
   left: 0;
+}
+
+.nav-bottom button span {
+  font-size: 2rem;
 }
 
 button {
@@ -26,23 +30,28 @@ button {
   padding: 5px;
 }
 
-.main-nav button span, .nav-bottom button span {
-  font-size: 1.8rem;
-}
-
 .main-nav button:hover, .nav-bottom button:hover {
   color: #020202a6;
+}
+
+.main-nav-wrapper {
+  width: 100%;
+  position: relative;
+  top: 0;
 }
 
 .main-nav {
   height: 8vh;
   min-height: fit-content;
   width: 100%;
+  background-color: #fffffe;
   border-bottom: 2px solid #efefef;
   justify-content: space-between;
   align-items: center;
   padding: 2%;
   display: flex;
+  position: relative;
+  top: 0;
 }
 
 .main-nav h1 {
@@ -51,8 +60,52 @@ button {
   font-size: 2.5rem;
 }
 
-.main-nav i {
+.main-nav span {
+  font-size: 2rem;
   display: block;
+}
+
+.post {
+  width: 100%;
+}
+
+.post .post-top-bar {
+  justify-content: space-between;
+  padding: 2%;
+  display: flex;
+}
+
+.post .post-top-bar .post-top-left {
+  align-items: center;
+  gap: 10px;
+  display: flex;
+}
+
+.post .post-top-bar .post-top-left .post-user-img img {
+  height: 50px;
+  width: 50px;
+  object-fit: cover;
+  border-radius: 50px;
+}
+
+.post .post-top-bar .button-post-option span {
+  font-size: 2rem;
+}
+
+.post .post-photo img {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+}
+
+.post .post-buttons {
+  width: 100%;
+  justify-content: space-between;
+  display: flex;
+}
+
+.post .post-buttons span {
+  padding: 5px;
+  font-size: 2rem;
 }
 
 * {
@@ -75,11 +128,15 @@ body {
   width: 100%;
   max-width: 500px;
   max-height: 900px;
-  height: 100vh;
-  margin: auto;
+  height: 100%;
   position: relative;
   overflow: hidden;
   box-shadow: 0 0 20px #00000059;
+}
+
+.main-app-window .app-content {
+  height: 100%;
+  overflow-y: auto !important;
 }
 
 /*# sourceMappingURL=index.33e4f694.css.map */

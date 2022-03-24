@@ -1,18 +1,28 @@
 @use '../../misc/variables.scss';
 @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&display=swap');
 
+.main-nav-wrapper {
+	position: relative;
+	top: 0;
+	width: 100%;
+}
+
 .main-nav {
 	h1 {
 		font-family: Dancing Script, cursive;
 		font-size: 2.5rem;
 		margin-left: 10px;
 	}
+	top: 0;
+	position: relative;
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
 	padding: 2%;
-	i {
+	background-color: variables.$c-body;
+	span {
 		display: block;
+		font-size: variables.$icon-button-size;
 	}
 	height: variables.$unified-nav-height;
 	min-height: fit-content;

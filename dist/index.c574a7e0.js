@@ -516,9 +516,10 @@ function hmrAcceptRun(bundle, id) {
 },{}],"gJRPm":[function(require,module,exports) {
 const appFeed = document.getElementById('app-content');
 const postTemplate = document.getElementById('post-template');
-const samplePost = postTemplate.content.cloneNode(true);
-appFeed.append(samplePost);
-console.log(samplePost);
+for(let i = 0; i < 10; i++){
+    const samplePost = postTemplate.content.cloneNode(true);
+    appFeed.append(samplePost);
+}
 
 },{}]},["2G3IT","gJRPm"], "gJRPm", "parcelRequireab7b")
 

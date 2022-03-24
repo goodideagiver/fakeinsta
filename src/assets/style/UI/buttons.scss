@@ -9,9 +9,6 @@ button {
 .nav-bottom {
 	button {
 		padding: 5px;
-		span {
-			font-size: 1.8rem;
-		}
 		color: variables.$c-main-font-icon;
 		&:hover {
 			color: rgba(variables.$c-main-font-icon, $alpha: 0.65);

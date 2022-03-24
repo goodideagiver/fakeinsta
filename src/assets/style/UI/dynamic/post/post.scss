@@ -1,0 +1,43 @@
+@use '../../../misc/variables.scss' as *;
+
+.post {
+	width: 100%;
+	.post-top-bar {
+		display: flex;
+		justify-content: space-between;
+		padding: 2%;
+		.post-top-left {
+			display: flex;
+			align-items: center;
+			gap: 10px;
+			.post-user-img {
+				img {
+					height: 50px;
+					width: 50px;
+					object-fit: cover;
+					border-radius: 50px;
+				}
+			}
+		}
+		.button-post-option {
+			span {
+				font-size: $icon-button-size;
+			}
+		}
+	}
+	.post-photo {
+		img {
+			width: 100%;
+			aspect-ratio: 1/1;
+		}
+	}
+	.post-buttons {
+		width: 100%;
+		display: flex;
+		justify-content: space-between;
+		span {
+			font-size: $icon-button-size;
+			padding: 5px;
+		}
+	}
+}

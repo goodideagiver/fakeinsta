@@ -25,8 +25,8 @@ new App();
 
 const appContent = document.getElementById('app-content');
 
-appContent.addEventListener('scroll', () => {
-	console.log(appContent.scrollTop, appContent.clientHeight + 500);
+appContent.addEventListener('scroll', e => {
+	console.log(e.target.scrollTop, e.target.offsetHeight + 500, e.target);
 	if (appContent.scrollTop > appContent.clientHeight + 200) {
 		console.log('add photo');
 		new Post().addRandomPost();

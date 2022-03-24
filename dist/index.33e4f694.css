@@ -7,26 +7,48 @@ body {
 
 .nav-bottom {
   width: 100%;
+  height: 8vh;
+  background-color: #fffffe;
+  border-top: 2px solid #efefef;
   grid-template-columns: 20% 20% 20% 20% 20%;
   display: grid;
-  position: fixed;
+  position: absolute;
   bottom: 0;
+  left: 0;
 }
 
 button {
   cursor: pointer;
 }
 
+.main-nav button, .nav-bottom button {
+  color: #020202;
+  padding: 5px;
+}
+
+.main-nav button span, .nav-bottom button span {
+  font-size: 1.8rem;
+}
+
+.main-nav button:hover, .nav-bottom button:hover {
+  color: #020202a6;
+}
+
 .main-nav {
+  height: 8vh;
+  min-height: fit-content;
+  width: 100%;
+  border-bottom: 2px solid #efefef;
   justify-content: space-between;
   align-items: center;
-  padding: 5px;
+  padding: 2%;
   display: flex;
 }
 
 .main-nav h1 {
+  margin-left: 10px;
   font-family: Dancing Script, cursive;
-  font-size: 36px;
+  font-size: 2.5rem;
 }
 
 .main-nav i {
@@ -41,10 +63,23 @@ button {
   padding: 0;
 }
 
+body {
+  height: 100vh;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+}
+
 .main-app-window {
-  max-width: 400px;
+  width: 100%;
+  max-width: 500px;
   max-height: 900px;
   height: 100vh;
+  margin: auto;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 0 20px #00000059;
 }
 
 /*# sourceMappingURL=index.33e4f694.css.map */

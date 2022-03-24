@@ -9,8 +9,21 @@
 	background-color: transparent;
 }
 
+body {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-direction: column;
+	height: 100vh;
+}
+
 .main-app-window {
-	max-width: 400px;
+	margin: auto;
+	overflow: hidden;
+	box-shadow: rgba(0, 0, 0, 0.349) 0 0 20px;
+	width: 100%;
+	max-width: 500px;
 	max-height: 900px;
 	height: 100vh;
+	position: relative;
 }

@@ -515,15 +515,14 @@ function hmrAcceptRun(bundle, id) {
 
 },{}],"gJRPm":[function(require,module,exports) {
 var _postJs = require("./post/Post.js");
-// const appFeed = document.getElementById('app-content');
-// const postTemplate = document.getElementById('post-template');
-// for (let i = 0; i < 10; i++) {
-// 	const samplePost = postTemplate.content.cloneNode(true);
-// 	appFeed.append(samplePost);
-// }
+var _scrollJs = require("./feed/Scroll.js");
 class App {
     constructor(elo){
         this.addInitialPosts();
+        this.init();
+    }
+    init() {
+        const sc = new _scrollJs.Scroll();
     }
     async addInitialPosts() {
         for(let index = 0; index < 4; index++)await new _postJs.Post().addRandomPost();
@@ -533,38 +532,14 @@ document.getElementById('add-post-btn').addEventListener('click', ()=>{
     new _postJs.Post().addRandomPost();
 });
 new App();
-const appContent = document.getElementById('app-content');
-const getPostsHeight = ()=>{
-    const posts = [
-        ...document.querySelectorAll('.post')
-    ];
-    posts.forEach((post, id)=>posts[id] = post.offsetHeight
-    );
-    const height = posts.reduce((prev, curr)=>prev + curr
-    , 0);
-    return height;
-};
-let lastFireEvent = -Infinity;
-appContent.addEventListener('scroll', (e)=>{
-    const maxHeight = getPostsHeight();
-    console.log(Date.now() - lastFireEvent);
-    if (appContent.scrollTop > maxHeight - 500 && Date.now() - lastFireEvent > 500) {
-        new _postJs.Post().addRandomPost();
-        lastFireEvent = Date.now();
-        return;
-    }
-});
-appContent.onscroll = function(ev) {
-    if (appContent.innerHeight + appContent.scrollY >= document.body.offsetHeight) console.log('bottom');
-};
 
-},{"./post/Post.js":"dfYSB"}],"dfYSB":[function(require,module,exports) {
+},{"./post/Post.js":"dfYSB","./feed/Scroll.js":"7zfbI"}],"dfYSB":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "Post", ()=>Post
 );
 class Post {
-    constructor(params){
+    constructor(){
         this.postTemplateEl = document.getElementById('post-template').content.cloneNode(true);
     }
     async fetchImage() {
@@ -612,6 +587,39 @@ exports.export = function(dest, destName, get) {
     });
 };
 
-},{}]},["2G3IT","gJRPm"], "gJRPm", "parcelRequireab7b")
+},{}],"7zfbI":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "Scroll", ()=>Scroll
+);
+var _postJs = require("../post/Post.js");
+class Scroll {
+    constructor(){
+        this.feedConatainer = document.getElementById('app-content');
+        this.lastFireEvent = -Infinity;
+        this.feedConatainer.addEventListener('scroll', ()=>this.feedScrollHandler()
+        );
+    }
+    getPostsHeight() {
+        const posts = [
+            ...document.querySelectorAll('.post')
+        ];
+        posts.forEach((post, id)=>posts[id] = post.offsetHeight
+        );
+        const height = posts.reduce((prev, curr)=>prev + curr
+        , 0);
+        return height;
+    }
+    feedScrollHandler() {
+        const maxHeight = this.getPostsHeight();
+        if (this.feedConatainer.scrollTop > maxHeight - 500 && Date.now() - this.lastFireEvent > 500) {
+            new _postJs.Post().addRandomPost();
+            this.lastFireEvent = Date.now();
+            return;
+        }
+    }
+}
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","../post/Post.js":"dfYSB"}]},["2G3IT","gJRPm"], "gJRPm", "parcelRequireab7b")
 
 //# sourceMappingURL=index.c574a7e0.js.map

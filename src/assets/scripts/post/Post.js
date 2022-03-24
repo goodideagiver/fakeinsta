@@ -1,5 +1,5 @@
 export class Post {
-	constructor(params) {
+	constructor() {
 		this.postTemplateEl = document
 			.getElementById('post-template')
 			.content.cloneNode(true);

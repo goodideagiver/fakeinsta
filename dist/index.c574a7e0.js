@@ -530,6 +530,17 @@ document.getElementById('add-post-btn').addEventListener('click', ()=>{
     new _postJs.Post().addRandomPost();
 });
 new App();
+const appContent = document.getElementById('app-content');
+appContent.addEventListener('scroll', ()=>{
+    console.log(appContent.scrollTop, appContent.clientHeight + 500);
+    if (appContent.scrollTop > appContent.clientHeight + 200) {
+        console.log('add photo');
+        new _postJs.Post().addRandomPost();
+    }
+});
+appContent.onscroll = function(ev) {
+    if (appContent.innerHeight + appContent.scrollY >= document.body.offsetHeight) console.log('bottom');
+};
 
 },{"./post/Post.js":"dfYSB"}],"dfYSB":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");

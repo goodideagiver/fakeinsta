@@ -22,3 +22,19 @@ document.getElementById('add-post-btn').addEventListener('click', () => {
 });
 
 new App();
+
+const appContent = document.getElementById('app-content');
+
+appContent.addEventListener('scroll', () => {
+	console.log(appContent.scrollTop, appContent.clientHeight + 500);
+	if (appContent.scrollTop > appContent.clientHeight + 200) {
+		console.log('add photo');
+		new Post().addRandomPost();
+	}
+});
+
+appContent.onscroll = function (ev) {
+	if (appContent.innerHeight + appContent.scrollY >= document.body.offsetHeight) {
+		console.log('bottom');
+	}
+};

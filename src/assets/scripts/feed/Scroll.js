@@ -14,16 +14,23 @@ export class Scroll {
 		return height;
 	}
 
+	getLastPostHeight() {
+		const lastPost = document.querySelector('.post:last-child');
+		return lastPost.offsetHeight;
+	}
+
 	feedScrollHandler() {
 		const maxHeight = this.getPostsHeight();
+		const scrollActivateHeight = this.getLastPostHeight() * 1.2;
+
 		if (
-			this.feedConatainer.scrollTop > maxHeight - 500 &&
+			this.feedConatainer.scrollTop > maxHeight - scrollActivateHeight &&
 			Date.now() - this.lastFireEvent > 500
 		) {
 			new Post().addRandomPost();
 			this.lastFireEvent = Date.now();
 			return;
-		} else if (this.feedConatainer.scrollTop > maxHeight - 500) {
+		} else if (this.feedConatainer.scrollTop > maxHeight - scrollActivateHeight) {
 			setTimeout(() => {
 				this.feedScrollHandler();
 			}, 500);

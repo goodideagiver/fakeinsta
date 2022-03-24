@@ -610,13 +610,18 @@ class Scroll {
         , 0);
         return height;
     }
+    getLastPostHeight() {
+        const lastPost = document.querySelector('.post:last-child');
+        return lastPost.offsetHeight;
+    }
     feedScrollHandler() {
         const maxHeight = this.getPostsHeight();
-        if (this.feedConatainer.scrollTop > maxHeight - 500 && Date.now() - this.lastFireEvent > 500) {
+        const scrollActivateHeight = this.getLastPostHeight() * 1.2;
+        if (this.feedConatainer.scrollTop > maxHeight - scrollActivateHeight && Date.now() - this.lastFireEvent > 500) {
             new _postJs.Post().addRandomPost();
             this.lastFireEvent = Date.now();
             return;
-        } else if (this.feedConatainer.scrollTop > maxHeight - 500) setTimeout(()=>{
+        } else if (this.feedConatainer.scrollTop > maxHeight - scrollActivateHeight) setTimeout(()=>{
             this.feedScrollHandler();
         }, 500);
     }

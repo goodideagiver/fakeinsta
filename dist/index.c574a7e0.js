@@ -514,12 +514,73 @@ function hmrAcceptRun(bundle, id) {
 }
 
 },{}],"gJRPm":[function(require,module,exports) {
-const appFeed = document.getElementById('app-content');
-const postTemplate = document.getElementById('post-template');
-for(let i = 0; i < 10; i++){
-    const samplePost = postTemplate.content.cloneNode(true);
-    appFeed.append(samplePost);
+var _postJs = require("./post/Post.js");
+// const appFeed = document.getElementById('app-content');
+// const postTemplate = document.getElementById('post-template');
+// for (let i = 0; i < 10; i++) {
+// 	const samplePost = postTemplate.content.cloneNode(true);
+// 	appFeed.append(samplePost);
+// }
+class App {
+    constructor(params){
+        for(let index = 0; index < 3; index++)new _postJs.Post().addRandomPost();
+    }
 }
+new App();
+
+},{"./post/Post.js":"dfYSB"}],"dfYSB":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "Post", ()=>Post
+);
+class Post {
+    constructor(params){
+        this.postTemplateEl = document.getElementById('post-template').content.cloneNode(true);
+    }
+    async fetchImage() {
+        const resp = await fetch('https://picsum.photos/200');
+        return await resp.url;
+    }
+    async addRandomPost() {
+        const postImageURL = await this.fetchImage();
+        const profileImageURL = await this.fetchImage();
+        const appFeedHook = document.getElementById('app-content');
+        const postEl = this.postTemplateEl.cloneNode(true);
+        postEl.querySelector('.post-photo img').src = postImageURL;
+        postEl.querySelector('.post-user-img img').src = profileImageURL;
+        appFeedHook.append(postEl);
+    }
+}
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"gkKU3":[function(require,module,exports) {
+exports.interopDefault = function(a) {
+    return a && a.__esModule ? a : {
+        default: a
+    };
+};
+exports.defineInteropFlag = function(a) {
+    Object.defineProperty(a, '__esModule', {
+        value: true
+    });
+};
+exports.exportAll = function(source, dest) {
+    Object.keys(source).forEach(function(key) {
+        if (key === 'default' || key === '__esModule' || dest.hasOwnProperty(key)) return;
+        Object.defineProperty(dest, key, {
+            enumerable: true,
+            get: function() {
+                return source[key];
+            }
+        });
+    });
+    return dest;
+};
+exports.export = function(dest, destName, get) {
+    Object.defineProperty(dest, destName, {
+        enumerable: true,
+        get: get
+    });
+};
 
 },{}]},["2G3IT","gJRPm"], "gJRPm", "parcelRequireab7b")
 

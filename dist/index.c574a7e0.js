@@ -544,12 +544,14 @@ const getPostsHeight = ()=>{
     , 0);
     return height;
 };
+let lastFireEvent = -Infinity;
 appContent.addEventListener('scroll', (e)=>{
     const maxHeight = getPostsHeight();
-    console.log(appContent.scrollTop, maxHeight);
-    if (appContent.scrollTop > maxHeight - 500) {
-        console.log('add photo');
+    console.log(Date.now() - lastFireEvent);
+    if (appContent.scrollTop > maxHeight - 500 && Date.now() - lastFireEvent > 500) {
         new _postJs.Post().addRandomPost();
+        lastFireEvent = Date.now();
+        return;
     }
 });
 appContent.onscroll = function(ev) {

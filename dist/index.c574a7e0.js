@@ -596,7 +596,7 @@ var _postJs = require("../post/Post.js");
 class Scroll {
     constructor(){
         this.feedConatainer = document.getElementById('app-content');
-        this.lastFireEvent = -Infinity;
+        this.lastPhotoFetchTimestamp = -Infinity;
         this.feedConatainer.addEventListener('scroll', ()=>this.feedScrollHandler()
         );
     }
@@ -614,16 +614,19 @@ class Scroll {
         const lastPost = document.querySelector('.post:last-child');
         return lastPost.offsetHeight;
     }
+    getMsFromLastFetch() {
+        return Date.now() - this.lastPhotoFetchTimestamp;
+    }
     feedScrollHandler() {
         const maxHeight = this.getPostsHeight();
         const scrollActivateHeight = this.getLastPostHeight() * 1.2;
-        if (this.feedConatainer.scrollTop > maxHeight - scrollActivateHeight && Date.now() - this.lastFireEvent > 500) {
+        if (this.feedConatainer.scrollTop > maxHeight - scrollActivateHeight && this.getMsFromLastFetch() > 500) {
             new _postJs.Post().addRandomPost();
-            this.lastFireEvent = Date.now();
+            this.lastPhotoFetchTimestamp = Date.now();
             return;
-        } else if (this.feedConatainer.scrollTop > maxHeight - scrollActivateHeight) setTimeout(()=>{
+        } else if (this.feedConatainer.scrollTop > maxHeight - scrollActivateHeight && this.getMsFromLastFetch() < 500) setTimeout(()=>{
             this.feedScrollHandler();
-        }, 500);
+        }, this.getMsFromLastFetch());
     }
 }
 

@@ -625,7 +625,6 @@ class Scroll {
             if (this.getMsFromLastFetch() > this.postFetchDelay) {
                 new _postJs.Post().addRandomPost();
                 this.lastPhotoFetchTimestamp = Date.now();
-                return;
             } else if (this.getMsFromLastFetch() < this.postFetchDelay) setTimeout(()=>{
                 this.feedScrollHandler();
             }, this.postFetchDelay - this.getMsFromLastFetch());

@@ -5,6 +5,7 @@ export class Scroll {
 		this.feedConatainer = document.getElementById('app-content');
 		this.lastPhotoFetchTimestamp = -Infinity;
 		this.feedConatainer.addEventListener('scroll', () => this.feedScrollHandler());
+		this.postFetchDelay = 500;
 	}
 
 	getPostsHeight() {
@@ -27,20 +28,16 @@ export class Scroll {
 		const maxHeight = this.getPostsHeight();
 		const scrollActivateHeight = this.getLastPostHeight() * 1.2;
 
-		if (
-			this.feedConatainer.scrollTop > maxHeight - scrollActivateHeight &&
-			this.getMsFromLastFetch() > 500
-		) {
-			new Post().addRandomPost();
-			this.lastPhotoFetchTimestamp = Date.now();
-			return;
-		} else if (
-			this.feedConatainer.scrollTop > maxHeight - scrollActivateHeight &&
-			this.getMsFromLastFetch() < 500
-		) {
-			setTimeout(() => {
-				this.feedScrollHandler();
-			}, this.getMsFromLastFetch());
+		if (this.feedConatainer.scrollTop > maxHeight - scrollActivateHeight) {
+			if (this.getMsFromLastFetch() > this.postFetchDelay) {
+				new Post().addRandomPost();
+				this.lastPhotoFetchTimestamp = Date.now();
+				return;
+			} else if (this.getMsFromLastFetch() < this.postFetchDelay) {
+				setTimeout(() => {
+					this.feedScrollHandler();
+				}, this.postFetchDelay - this.getMsFromLastFetch());
+			}
 		}
 	}
 }

@@ -619,9 +619,9 @@ class Scroll {
         return Date.now() - this.lastPhotoFetchTimestamp;
     }
     feedScrollHandler() {
-        const maxHeight = this.getPostsHeight();
-        const scrollActivateHeight = this.getLastPostHeight() * 1.4;
-        if (this.feedConatainer.scrollTop > maxHeight - scrollActivateHeight) {
+        const feedHeight = this.getPostsHeight();
+        const postFetchHeightThreshold = this.getLastPostHeight() * 1.4;
+        if (this.feedConatainer.scrollTop > feedHeight - postFetchHeightThreshold) {
             if (this.getMsFromLastFetch() > this.postFetchDelay) {
                 new _postJs.Post().addRandomPost();
                 this.lastPhotoFetchTimestamp = Date.now();

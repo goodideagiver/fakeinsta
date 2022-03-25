@@ -620,7 +620,7 @@ class Scroll {
     }
     feedScrollHandler() {
         const maxHeight = this.getPostsHeight();
-        const scrollActivateHeight = this.getLastPostHeight() * 1.2;
+        const scrollActivateHeight = this.getLastPostHeight() * 1.4;
         if (this.feedConatainer.scrollTop > maxHeight - scrollActivateHeight) {
             if (this.getMsFromLastFetch() > this.postFetchDelay) {
                 new _postJs.Post().addRandomPost();

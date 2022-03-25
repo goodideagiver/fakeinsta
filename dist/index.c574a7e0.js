@@ -569,6 +569,7 @@ class Post {
         postEl.querySelector('.summary-username').textContent = username;
         postEl.querySelector('.description').textContent = desc;
         postEl.querySelector('summary span').textContent = this.generateDescPeekString(desc);
+        postEl.querySelector('.like-count span').textContent = (Math.random() * 1000000).toFixed(0).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
         await appFeedHook.append(postEl);
     }
 }

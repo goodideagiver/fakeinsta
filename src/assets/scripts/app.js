@@ -12,14 +12,10 @@ class App {
 	}
 
 	async addInitialPosts() {
-		for (let index = 0; index < 4; index++) {
+		for (let index = 0; index < 2; index++) {
 			await new Post().addRandomPost();
 		}
 	}
 }
-
-document.getElementById('add-post-btn').addEventListener('click', () => {
-	new Post().addRandomPost();
-});
 
 new App();

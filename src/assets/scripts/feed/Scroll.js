@@ -2,10 +2,14 @@ import { Post } from '../post/Post.js';
 
 export class Scroll {
 	constructor() {
-		this.feedConatainer = document.getElementById('app-content');
 		this.lastPhotoFetchTimestamp = -Infinity;
-		this.feedConatainer.addEventListener('scroll', () => this.feedScrollHandler());
 		this.postFetchDelay = 500;
+		this.initFeedHandler();
+	}
+
+	initFeedHandler() {
+		this.feedConatainer = document.getElementById('app-content');
+		this.feedConatainer.addEventListener('scroll', () => this.feedScrollHandler());
 	}
 
 	getPostsHeight() {

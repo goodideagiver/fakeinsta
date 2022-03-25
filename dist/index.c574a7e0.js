@@ -525,12 +525,9 @@ class App {
         const sc = new _scrollJs.Scroll();
     }
     async addInitialPosts() {
-        for(let index = 0; index < 4; index++)await new _postJs.Post().addRandomPost();
+        for(let index = 0; index < 2; index++)await new _postJs.Post().addRandomPost();
     }
 }
-document.getElementById('add-post-btn').addEventListener('click', ()=>{
-    new _postJs.Post().addRandomPost();
-});
 new App();
 
 },{"./post/Post.js":"dfYSB","./feed/Scroll.js":"7zfbI"}],"dfYSB":[function(require,module,exports) {
@@ -546,7 +543,7 @@ class Post {
     }
     async fetchImage() {
         const resp = await fetch('https://picsum.photos/200');
-        return await resp.url;
+        return resp.url;
     }
     generateDescPeekString(desc) {
         const arr = desc.split(' ');
@@ -2893,11 +2890,14 @@ parcelHelpers.export(exports, "Scroll", ()=>Scroll
 var _postJs = require("../post/Post.js");
 class Scroll {
     constructor(){
-        this.feedConatainer = document.getElementById('app-content');
         this.lastPhotoFetchTimestamp = -Infinity;
+        this.postFetchDelay = 500;
+        this.initFeedHandler();
+    }
+    initFeedHandler() {
+        this.feedConatainer = document.getElementById('app-content');
         this.feedConatainer.addEventListener('scroll', ()=>this.feedScrollHandler()
         );
-        this.postFetchDelay = 500;
     }
     getPostsHeight() {
         const posts = [

@@ -9,7 +9,7 @@ export class Post {
 
 	async fetchImage() {
 		const resp = await fetch('https://picsum.photos/200');
-		return await resp.url;
+		return resp.url;
 	}
 
 	generateDescPeekString(desc) {

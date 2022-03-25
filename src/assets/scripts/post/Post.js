@@ -24,6 +24,15 @@ export class Post {
 		return peekArr.join(' ').trim() + '...';
 	}
 
+	addHideDescButton(target) {
+		const hideDesc = document.createElement('span');
+		hideDesc.textContent = ' hide';
+		hideDesc.addEventListener('click', () => {
+			hideDesc.closest('details').open = false;
+		});
+		target.append(hideDesc);
+	}
+
 	async addRandomPost() {
 		const postImageURL = await this.fetchImage();
 		const profileImageURL = await this.fetchImage();
@@ -38,7 +47,10 @@ export class Post {
 		postEl.querySelector('.post-user-name').textContent = username;
 		postEl.querySelector('.summary-username').textContent = username;
 
-		postEl.querySelector('.description').textContent = desc;
+		const descEl = postEl.querySelector('.description');
+		descEl.textContent = desc;
+		this.addHideDescButton(descEl);
+
 		postEl.querySelector('summary span').textContent =
 			this.generateDescPeekString(desc);
 

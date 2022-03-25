@@ -543,7 +543,7 @@ class Post {
     }
     async fetchImage() {
         const resp = await fetch('https://picsum.photos/200');
-        if (!resp.ok) return new URL(require("8847c31af0b41f59"));
+        if (!resp.ok) return new URL(require("596d68d576073f51"));
         return resp.url;
     }
     generateDescPeekString(desc) {
@@ -582,7 +582,7 @@ class Post {
     }
 }
 
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","./data/Names.js":"8Jz8L","./data/Desc.js":"hp7bG","8847c31af0b41f59":"6GlWr"}],"gkKU3":[function(require,module,exports) {
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","./data/Names.js":"8Jz8L","./data/Desc.js":"hp7bG","596d68d576073f51":"6GlWr"}],"gkKU3":[function(require,module,exports) {
 exports.interopDefault = function(a) {
     return a && a.__esModule ? a : {
         default: a
@@ -2933,8 +2933,8 @@ class Scroll {
         this.initFeedHandler();
     }
     initFeedHandler() {
-        this.feedConatainer = document.getElementById('app-content');
-        this.feedConatainer.addEventListener('scroll', ()=>this.feedScrollHandler()
+        this.feedContainer = document.getElementById('app-content');
+        this.feedContainer.addEventListener('scroll', ()=>this.feedScrollHandler()
         );
     }
     getPostsHeight() {
@@ -2957,7 +2957,7 @@ class Scroll {
     feedScrollHandler() {
         const feedHeight = this.getPostsHeight();
         const postFetchHeightThreshold = this.getLastPostHeight() * 1.4;
-        if (this.feedConatainer.scrollTop > feedHeight - postFetchHeightThreshold) {
+        if (this.feedContainer.scrollTop > feedHeight - postFetchHeightThreshold) {
             if (this.getMsFromLastFetch() > this.postFetchDelay) {
                 new _postJs.Post().addRandomPost();
                 this.lastPhotoFetchTimestamp = Date.now();

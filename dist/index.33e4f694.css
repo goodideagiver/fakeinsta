@@ -103,6 +103,21 @@ button {
   padding: 0 2%;
 }
 
+.post .post-desc details {
+  margin: 10px 0;
+}
+
+.post .post-desc details .details-username {
+  font-weight: bold;
+}
+
+.post .post-desc details .show-hide-btn-post {
+  cursor: pointer;
+  color: #02020299;
+  font-weight: bold;
+  display: inline;
+}
+
 .post .post-desc summary {
   align-items: baseline;
   gap: .3rem;
@@ -113,15 +128,7 @@ button {
   font-size: 1rem;
 }
 
-.post .post-desc summary p {
-  color: #02020299;
-}
-
-.post .post-desc details[open] {
-  margin: 10px 0;
-}
-
-.post .post-desc details[open] summary span, .post .post-desc details[open] summary p {
+.post .post-desc details[open] summary, .post .post-desc details[open] summary span, .post .post-desc details[open] summary p {
   display: none;
 }
 

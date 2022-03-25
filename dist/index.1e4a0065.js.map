@@ -1,1 +1,0 @@
-{"mappings":"AAAA,OAAO,CAAC,GAAG,CAAC,cAAc,CAAC,CAAC;AAC5B,MAAM,IAAI,GAAG,GAAG,AAAC;AACjB,OAAO,CAAC,GAAG,CAAC,IAAI,CAAC,CAAC","sources":["src/assets/scripts/app.js"],"sourcesContent":["console.log('hello parcel');\r\nconst test = 123;\r\nconsole.log(test);\r\n"],"names":[],"version":3,"file":"index.1e4a0065.js.map","sourceRoot":"/__parcel_source_root/"}

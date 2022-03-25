@@ -37,6 +37,18 @@
 		padding: 0 2%;
 	}
 	.post-desc {
+		details {
+			.details-username {
+				font-weight: bold;
+			}
+			margin: 10px 0;
+			.show-hide-btn-post {
+				cursor: pointer;
+				color: rgba($color: $c-main-font-icon, $alpha: 0.6);
+				font-weight: bold;
+				display: inline;
+			}
+		}
 		summary {
 			display: flex;
 			align-items: baseline;
@@ -47,13 +59,10 @@
 			h2 {
 				font-size: 1rem;
 			}
-			p {
-				color: rgba($color: $c-main-font-icon, $alpha: 0.6);
-			}
 		}
 		details[open] {
-			margin: 10px 0;
 			summary {
+				display: none;
 				span,
 				p {
 					display: none;

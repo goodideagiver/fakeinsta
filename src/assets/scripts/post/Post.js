@@ -32,6 +32,7 @@ export class Post {
 
 	addHideDescButton(target) {
 		const hideDesc = document.createElement('span');
+		hideDesc.className = 'show-hide-btn-post';
 		hideDesc.textContent = ' hide';
 		hideDesc.addEventListener('click', () => {
 			hideDesc.closest('details').open = false;
@@ -44,6 +45,7 @@ export class Post {
 		const profileImageURL = await this.fetchImage();
 		const appFeedHook = document.getElementById('app-content');
 		const username = getRandomName();
+
 		const desc = getRandomSentence();
 
 		const postEl = this.postTemplateEl.cloneNode(true);
@@ -52,6 +54,7 @@ export class Post {
 
 		postEl.querySelector('.post-user-name').textContent = username;
 		postEl.querySelector('.summary-username').textContent = username;
+		postEl.querySelector('.details-username').textContent = username;
 
 		const descEl = postEl.querySelector('.description');
 		descEl.textContent = desc;

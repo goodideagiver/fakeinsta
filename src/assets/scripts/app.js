@@ -18,4 +18,5 @@ class App {
 	}
 }
 
+console.log('siema');
 new App();

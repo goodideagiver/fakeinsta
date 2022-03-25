@@ -528,6 +528,7 @@ class App {
         for(let index = 0; index < 2; index++)await new _postJs.Post().addRandomPost();
     }
 }
+console.log('siema');
 new App();
 
 },{"./post/Post.js":"dfYSB","./feed/Scroll.js":"7zfbI"}],"dfYSB":[function(require,module,exports) {
@@ -556,6 +557,7 @@ class Post {
     }
     addHideDescButton(target) {
         const hideDesc = document.createElement('span');
+        hideDesc.className = 'show-hide-btn-post';
         hideDesc.textContent = ' hide';
         hideDesc.addEventListener('click', ()=>{
             hideDesc.closest('details').open = false;
@@ -573,6 +575,7 @@ class Post {
         postEl.querySelector('.post-user-img img').src = profileImageURL;
         postEl.querySelector('.post-user-name').textContent = username;
         postEl.querySelector('.summary-username').textContent = username;
+        postEl.querySelector('.details-username').textContent = username;
         const descEl = postEl.querySelector('.description');
         descEl.textContent = desc;
         this.addHideDescButton(descEl);

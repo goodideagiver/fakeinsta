@@ -621,12 +621,11 @@ class RandomPost extends _postUtilsJs.PostUtils {
         super(_namesJs.getRandomName(), _descJs.getRandomSentence(), (Math.random() * 1000000).toFixed(0));
     }
     async add() {
-        const postImageURL = await this.fetchImage();
-        const profileImageURL = await this.fetchImage();
-        const postEl = this.postTemplateEl;
-        postEl.querySelector('.post-photo img').src = postImageURL;
-        postEl.querySelector('.post-user-img img').src = profileImageURL;
-        await this.feedHook.append(postEl);
+        const postImageURL = await this.fetchImage(480);
+        const profileImageURL = await this.fetchImage(50);
+        this.postTemplateEl.querySelector('.post-photo img').src = postImageURL;
+        this.postTemplateEl.querySelector('.post-user-img img').src = profileImageURL;
+        this.feedHook.append(this.postTemplateEl);
     }
 }
 
@@ -660,8 +659,8 @@ class PostUtils {
         this.addHideDescButton(descEl);
         this.postTemplateEl.querySelector('summary span').textContent = this.generateDescPeekString(desc);
     }
-    async fetchImage() {
-        const resp = await fetch('https://picsum.photos/200');
+    async fetchImage(px = 200) {
+        const resp = await fetch(`https://picsum.photos/${px}`);
         if (!resp.ok) return new URL(require("e87461f31f62f5eb"));
         return resp.url;
     }

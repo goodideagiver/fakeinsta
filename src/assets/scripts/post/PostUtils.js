@@ -35,8 +35,8 @@ export class PostUtils {
 			this.generateDescPeekString(desc);
 	}
 
-	async fetchImage() {
-		const resp = await fetch('https://picsum.photos/200');
+	async fetchImage(px = 200) {
+		const resp = await fetch(`https://picsum.photos/${px}`);
 		if (!resp.ok) {
 			return new URL(
 				'../../img/post/placeholder.jpg?as=webp&width=250',

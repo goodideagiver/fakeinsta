@@ -8,13 +8,12 @@ export class RandomPost extends PostUtils {
 	}
 
 	async add() {
-		const postImageURL = await this.fetchImage();
-		const profileImageURL = await this.fetchImage();
+		const postImageURL = await this.fetchImage(480);
+		const profileImageURL = await this.fetchImage(50);
 
-		const postEl = this.postTemplateEl;
-		postEl.querySelector('.post-photo img').src = postImageURL;
-		postEl.querySelector('.post-user-img img').src = profileImageURL;
+		this.postTemplateEl.querySelector('.post-photo img').src = postImageURL;
+		this.postTemplateEl.querySelector('.post-user-img img').src = profileImageURL;
 
-		await this.feedHook.append(postEl);
+		this.feedHook.append(this.postTemplateEl);
 	}
 }

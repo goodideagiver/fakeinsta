@@ -11,10 +11,6 @@ export class PostUtils {
 		this.feedHook = document.getElementById('app-content');
 	}
 
-	initPostElementsHook() {
-		this.username;
-	}
-
 	set likeCount(likeAmount) {
 		this.postTemplateEl.querySelector('.like-count span').textContent = likeAmount
 			.toString()

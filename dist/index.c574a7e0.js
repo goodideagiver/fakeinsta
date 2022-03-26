@@ -618,25 +618,15 @@ var _descJs = require("./data/Desc.js");
 var _postUtilsJs = require("./PostUtils.js");
 class RandomPost extends _postUtilsJs.PostUtils {
     constructor(){
-        super();
+        super(_namesJs.getRandomName(), _descJs.getRandomSentence(), (Math.random() * 1000000).toFixed(0));
     }
     async add() {
         const postImageURL = await this.fetchImage();
         const profileImageURL = await this.fetchImage();
         const appFeedHook = document.getElementById('app-content');
-        const username = _namesJs.getRandomName();
-        const desc = _descJs.getRandomSentence();
         const postEl = this.postTemplateEl;
         postEl.querySelector('.post-photo img').src = postImageURL;
         postEl.querySelector('.post-user-img img').src = profileImageURL;
-        postEl.querySelector('.post-user-name').textContent = username;
-        postEl.querySelector('.summary-username').textContent = username;
-        postEl.querySelector('.details-username').textContent = username;
-        const descEl = postEl.querySelector('.description');
-        descEl.textContent = desc;
-        this.addHideDescButton(descEl);
-        postEl.querySelector('summary span').textContent = this.generateDescPeekString(desc);
-        postEl.querySelector('.like-count span').textContent = (Math.random() * 1000000).toFixed(0).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
         await appFeedHook.append(postEl);
     }
 }
@@ -647,8 +637,28 @@ parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "PostUtils", ()=>PostUtils
 );
 class PostUtils {
-    constructor(){
+    constructor(username, description = '', likes = 0){
         this.postTemplateEl = document.getElementById('post-template').content.cloneNode(true);
+        this.username = username;
+        if (description) this.desc = description;
+        this.likeCount = likes;
+    }
+    initPostElementsHook() {
+        this.username;
+    }
+    set likeCount(likeAmount) {
+        this.postTemplateEl.querySelector('.like-count span').textContent = likeAmount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
+    }
+    set username(username) {
+        this.postTemplateEl.querySelector('.post-user-name').textContent = username;
+        this.postTemplateEl.querySelector('.summary-username').textContent = username;
+        this.postTemplateEl.querySelector('.details-username').textContent = username;
+    }
+    set desc(desc) {
+        const descEl = this.postTemplateEl.querySelector('.description');
+        descEl.textContent = desc;
+        this.addHideDescButton(descEl);
+        this.postTemplateEl.querySelector('summary span').textContent = this.generateDescPeekString(desc);
     }
     async fetchImage() {
         const resp = await fetch('https://picsum.photos/200');

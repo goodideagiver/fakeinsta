@@ -8,6 +8,7 @@ export class PostUtils {
 			this.desc = description;
 		}
 		this.likeCount = likes;
+		this.feedHook = document.getElementById('app-content');
 	}
 
 	initPostElementsHook() {

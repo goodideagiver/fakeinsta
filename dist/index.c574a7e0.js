@@ -623,11 +623,10 @@ class RandomPost extends _postUtilsJs.PostUtils {
     async add() {
         const postImageURL = await this.fetchImage();
         const profileImageURL = await this.fetchImage();
-        const appFeedHook = document.getElementById('app-content');
         const postEl = this.postTemplateEl;
         postEl.querySelector('.post-photo img').src = postImageURL;
         postEl.querySelector('.post-user-img img').src = profileImageURL;
-        await appFeedHook.append(postEl);
+        await this.feedHook.append(postEl);
     }
 }
 
@@ -642,6 +641,7 @@ class PostUtils {
         this.username = username;
         if (description) this.desc = description;
         this.likeCount = likes;
+        this.feedHook = document.getElementById('app-content');
     }
     initPostElementsHook() {
         this.username;

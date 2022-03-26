@@ -10,12 +10,11 @@ export class RandomPost extends PostUtils {
 	async add() {
 		const postImageURL = await this.fetchImage();
 		const profileImageURL = await this.fetchImage();
-		const appFeedHook = document.getElementById('app-content');
 
 		const postEl = this.postTemplateEl;
 		postEl.querySelector('.post-photo img').src = postImageURL;
 		postEl.querySelector('.post-user-img img').src = profileImageURL;
 
-		await appFeedHook.append(postEl);
+		await this.feedHook.append(postEl);
 	}
 }

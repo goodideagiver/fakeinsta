@@ -530,85 +530,7 @@ class App {
 }
 new App();
 
-},{"./feed/Scroll.js":"7zfbI","./post/RandomPost.js":"hJZoe"}],"7zfbI":[function(require,module,exports) {
-var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "Scroll", ()=>Scroll
-);
-var _randomPostJs = require("../post/RandomPost.js");
-class Scroll {
-    constructor(){
-        this.lastPhotoFetchTimestamp = -Infinity;
-        this.postFetchDelay = 500;
-        this.initFeedHandler();
-    }
-    initFeedHandler() {
-        this.feedContainer = document.getElementById('app-content');
-        this.feedContainer.addEventListener('scroll', ()=>this.feedScrollHandler()
-        );
-    }
-    getPostsHeight() {
-        const posts = [
-            ...document.querySelectorAll('.post')
-        ];
-        posts.forEach((post, id)=>posts[id] = post.offsetHeight
-        );
-        const height = posts.reduce((prev, curr)=>prev + curr
-        , 0);
-        return height;
-    }
-    getLastPostHeight() {
-        const lastPost = document.querySelector('.post:last-child');
-        return lastPost.offsetHeight;
-    }
-    getMsFromLastFetch() {
-        return Date.now() - this.lastPhotoFetchTimestamp;
-    }
-    feedScrollHandler() {
-        const feedHeight = this.getPostsHeight();
-        const postFetchHeightThreshold = this.getLastPostHeight() * 1.4;
-        if (this.feedContainer.scrollTop > feedHeight - postFetchHeightThreshold) {
-            if (this.getMsFromLastFetch() > this.postFetchDelay) {
-                new _randomPostJs.RandomPost().add();
-                this.lastPhotoFetchTimestamp = Date.now();
-            } else if (this.getMsFromLastFetch() < this.postFetchDelay) setTimeout(()=>{
-                this.feedScrollHandler();
-            }, this.postFetchDelay - this.getMsFromLastFetch());
-        }
-    }
-}
-
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","../post/RandomPost.js":"hJZoe"}],"gkKU3":[function(require,module,exports) {
-exports.interopDefault = function(a) {
-    return a && a.__esModule ? a : {
-        default: a
-    };
-};
-exports.defineInteropFlag = function(a) {
-    Object.defineProperty(a, '__esModule', {
-        value: true
-    });
-};
-exports.exportAll = function(source, dest) {
-    Object.keys(source).forEach(function(key) {
-        if (key === 'default' || key === '__esModule' || dest.hasOwnProperty(key)) return;
-        Object.defineProperty(dest, key, {
-            enumerable: true,
-            get: function() {
-                return source[key];
-            }
-        });
-    });
-    return dest;
-};
-exports.export = function(dest, destName, get) {
-    Object.defineProperty(dest, destName, {
-        enumerable: true,
-        get: get
-    });
-};
-
-},{}],"hJZoe":[function(require,module,exports) {
+},{"./post/RandomPost.js":"hJZoe","./feed/Scroll.js":"7zfbI"}],"hJZoe":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "RandomPost", ()=>RandomPost
@@ -629,98 +551,7 @@ class RandomPost extends _postUtilsJs.PostUtils {
     }
 }
 
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","./PostUtils.js":"izjbP","./data/Names.js":"8Jz8L","./data/Desc.js":"hp7bG"}],"izjbP":[function(require,module,exports) {
-var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "PostUtils", ()=>PostUtils
-);
-class PostUtils {
-    constructor(username, description = '', likes = 0){
-        this.postTemplateEl = document.getElementById('post-template').content.cloneNode(true);
-        this.username = username;
-        if (description) this.desc = description;
-        this.likeCount = likes;
-        this.feedHook = document.getElementById('app-content');
-    }
-    initPostElementsHook() {
-        this.username;
-    }
-    set likeCount(likeAmount) {
-        this.postTemplateEl.querySelector('.like-count span').textContent = likeAmount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
-    }
-    set username(username) {
-        this.postTemplateEl.querySelector('.post-user-name').textContent = username;
-        this.postTemplateEl.querySelector('.summary-username').textContent = username;
-        this.postTemplateEl.querySelector('.details-username').textContent = username;
-    }
-    set desc(desc) {
-        const descEl = this.postTemplateEl.querySelector('.description');
-        descEl.textContent = desc;
-        this.addHideDescButton(descEl);
-        this.postTemplateEl.querySelector('summary span').textContent = this.generateDescPeekString(desc);
-    }
-    async fetchImage(px = 200) {
-        const resp = await fetch(`https://picsum.photos/${px}`);
-        if (!resp.ok) return new URL(require("e87461f31f62f5eb"));
-        return resp.url;
-    }
-    generateDescPeekString(desc) {
-        const arr = desc.split(' ');
-        const peekArr = arr.map((sentence, id)=>{
-            if (id > 3) return;
-            else return sentence;
-        });
-        return peekArr.join(' ').trim() + '...';
-    }
-    addHideDescButton(target) {
-        const hideDesc = document.createElement('span');
-        hideDesc.className = 'show-hide-btn-post';
-        hideDesc.textContent = ' hide';
-        hideDesc.addEventListener('click', ()=>{
-            hideDesc.closest('details').open = false;
-        });
-        target.append(hideDesc);
-    }
-}
-
-},{"e87461f31f62f5eb":"6GlWr","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"6GlWr":[function(require,module,exports) {
-module.exports = require('./helpers/bundle-url').getBundleURL('8e1QZ') + "placeholder.3f6dbcbe.webp" + "?" + Date.now();
-
-},{"./helpers/bundle-url":"lgJ39"}],"lgJ39":[function(require,module,exports) {
-"use strict";
-var bundleURL = {};
-function getBundleURLCached(id) {
-    var value = bundleURL[id];
-    if (!value) {
-        value = getBundleURL();
-        bundleURL[id] = value;
-    }
-    return value;
-}
-function getBundleURL() {
-    try {
-        throw new Error();
-    } catch (err) {
-        var matches = ('' + err.stack).match(/(https?|file|ftp):\/\/[^)\n]+/g);
-        if (matches) // The first two stack frames will be this function and getBundleURLCached.
-        // Use the 3rd one, which will be a runtime in the original bundle.
-        return getBaseURL(matches[2]);
-    }
-    return '/';
-}
-function getBaseURL(url) {
-    return ('' + url).replace(/^((?:https?|file|ftp):\/\/.+)\/[^/]+$/, '$1') + '/';
-} // TODO: Replace uses with `new URL(url).origin` when ie11 is no longer supported.
-function getOrigin(url) {
-    var matches = ('' + url).match(/(https?|file|ftp):\/\/[^/]+/);
-    if (!matches) throw new Error('Origin not found');
-    return matches[0];
-}
-exports.getBundleURL = getBundleURLCached;
-exports.getBaseURL = getBaseURL;
-exports.getOrigin = getOrigin;
-
-},{}],"8Jz8L":[function(require,module,exports) {
+},{"./data/Names.js":"8Jz8L","./data/Desc.js":"hp7bG","./PostUtils.js":"izjbP","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"8Jz8L":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "getRandomName", ()=>getRandomName
@@ -2731,7 +2562,37 @@ function getRandomName() {
     return names[(Math.random() * (names.length - 1)).toFixed(0)];
 }
 
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"hp7bG":[function(require,module,exports) {
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"gkKU3":[function(require,module,exports) {
+exports.interopDefault = function(a) {
+    return a && a.__esModule ? a : {
+        default: a
+    };
+};
+exports.defineInteropFlag = function(a) {
+    Object.defineProperty(a, '__esModule', {
+        value: true
+    });
+};
+exports.exportAll = function(source, dest) {
+    Object.keys(source).forEach(function(key) {
+        if (key === 'default' || key === '__esModule' || dest.hasOwnProperty(key)) return;
+        Object.defineProperty(dest, key, {
+            enumerable: true,
+            get: function() {
+                return source[key];
+            }
+        });
+    });
+    return dest;
+};
+exports.export = function(dest, destName, get) {
+    Object.defineProperty(dest, destName, {
+        enumerable: true,
+        get: get
+    });
+};
+
+},{}],"hp7bG":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "getRandomSentence", ()=>getRandomSentence
@@ -2991,6 +2852,142 @@ function getRandomSentence() {
     return wordArray[Math.floor(wordArray.length * Math.random())];
 }
 
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}]},["2G3IT","gJRPm"], "gJRPm", "parcelRequireab7b")
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"izjbP":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "PostUtils", ()=>PostUtils
+);
+class PostUtils {
+    constructor(username, description = '', likes = 0){
+        this.postTemplateEl = document.getElementById('post-template').content.cloneNode(true);
+        this.username = username;
+        if (description) this.desc = description;
+        this.likeCount = likes;
+        this.feedHook = document.getElementById('app-content');
+    }
+    set likeCount(likeAmount) {
+        this.postTemplateEl.querySelector('.like-count span').textContent = likeAmount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
+    }
+    set username(username) {
+        this.postTemplateEl.querySelector('.post-user-name').textContent = username;
+        this.postTemplateEl.querySelector('.summary-username').textContent = username;
+        this.postTemplateEl.querySelector('.details-username').textContent = username;
+    }
+    set desc(desc) {
+        const descEl = this.postTemplateEl.querySelector('.description');
+        descEl.textContent = desc;
+        this.addHideDescButton(descEl);
+        this.postTemplateEl.querySelector('summary span').textContent = this.generateDescPeekString(desc);
+    }
+    async fetchImage(px = 200) {
+        const resp = await fetch(`https://picsum.photos/${px}`);
+        if (!resp.ok) return new URL(require("e87461f31f62f5eb"));
+        return resp.url;
+    }
+    generateDescPeekString(desc) {
+        const arr = desc.split(' ');
+        const peekArr = arr.map((sentence, id)=>{
+            if (id > 3) return;
+            else return sentence;
+        });
+        return peekArr.join(' ').trim() + '...';
+    }
+    addHideDescButton(target) {
+        const hideDesc = document.createElement('span');
+        hideDesc.className = 'show-hide-btn-post';
+        hideDesc.textContent = ' hide';
+        hideDesc.addEventListener('click', ()=>{
+            hideDesc.closest('details').open = false;
+        });
+        target.append(hideDesc);
+    }
+}
+
+},{"e87461f31f62f5eb":"6GlWr","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"6GlWr":[function(require,module,exports) {
+module.exports = require('./helpers/bundle-url').getBundleURL('8e1QZ') + "placeholder.3f6dbcbe.webp" + "?" + Date.now();
+
+},{"./helpers/bundle-url":"lgJ39"}],"lgJ39":[function(require,module,exports) {
+"use strict";
+var bundleURL = {};
+function getBundleURLCached(id) {
+    var value = bundleURL[id];
+    if (!value) {
+        value = getBundleURL();
+        bundleURL[id] = value;
+    }
+    return value;
+}
+function getBundleURL() {
+    try {
+        throw new Error();
+    } catch (err) {
+        var matches = ('' + err.stack).match(/(https?|file|ftp):\/\/[^)\n]+/g);
+        if (matches) // The first two stack frames will be this function and getBundleURLCached.
+        // Use the 3rd one, which will be a runtime in the original bundle.
+        return getBaseURL(matches[2]);
+    }
+    return '/';
+}
+function getBaseURL(url) {
+    return ('' + url).replace(/^((?:https?|file|ftp):\/\/.+)\/[^/]+$/, '$1') + '/';
+} // TODO: Replace uses with `new URL(url).origin` when ie11 is no longer supported.
+function getOrigin(url) {
+    var matches = ('' + url).match(/(https?|file|ftp):\/\/[^/]+/);
+    if (!matches) throw new Error('Origin not found');
+    return matches[0];
+}
+exports.getBundleURL = getBundleURLCached;
+exports.getBaseURL = getBaseURL;
+exports.getOrigin = getOrigin;
+
+},{}],"7zfbI":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "Scroll", ()=>Scroll
+);
+var _randomPostJs = require("../post/RandomPost.js");
+class Scroll {
+    constructor(){
+        this.lastPhotoFetchTimestamp = -Infinity;
+        this.postFetchDelay = 500;
+        this.initFeedHandler();
+    }
+    initFeedHandler() {
+        this.feedContainer = document.getElementById('app-content');
+        this.feedContainer.addEventListener('scroll', ()=>this.feedScrollHandler()
+        );
+    }
+    getPostsHeight() {
+        const posts = [
+            ...document.querySelectorAll('.post')
+        ];
+        posts.forEach((post, id)=>posts[id] = post.offsetHeight
+        );
+        const height = posts.reduce((prev, curr)=>prev + curr
+        , 0);
+        return height;
+    }
+    getLastPostHeight() {
+        const lastPost = document.querySelector('.post:last-child');
+        return lastPost.offsetHeight;
+    }
+    getMsFromLastFetch() {
+        return Date.now() - this.lastPhotoFetchTimestamp;
+    }
+    feedScrollHandler() {
+        const feedHeight = this.getPostsHeight();
+        const postFetchHeightThreshold = this.getLastPostHeight() * 1.4;
+        if (this.feedContainer.scrollTop > feedHeight - postFetchHeightThreshold) {
+            if (this.getMsFromLastFetch() > this.postFetchDelay) {
+                new _randomPostJs.RandomPost().add();
+                this.lastPhotoFetchTimestamp = Date.now();
+            } else if (this.getMsFromLastFetch() < this.postFetchDelay) setTimeout(()=>{
+                this.feedScrollHandler();
+            }, this.postFetchDelay - this.getMsFromLastFetch());
+        }
+    }
+}
+
+},{"../post/RandomPost.js":"hJZoe","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}]},["2G3IT","gJRPm"], "gJRPm", "parcelRequireab7b")
 
 //# sourceMappingURL=index.c574a7e0.js.map

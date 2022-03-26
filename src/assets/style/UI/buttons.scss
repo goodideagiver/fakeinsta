@@ -10,6 +10,9 @@ button {
 	button {
 		padding: 5px;
 		color: variables.$c-main-font-icon;
+		* {
+			color: variables.$c-main-font-icon;
+		}
 		&:hover {
 			color: rgba(variables.$c-main-font-icon, $alpha: 0.65);
 		}

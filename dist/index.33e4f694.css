@@ -31,6 +31,10 @@ button {
   padding: 5px;
 }
 
+.main-nav button *, .nav-bottom button * {
+  color: #020202;
+}
+
 .main-nav button:hover, .nav-bottom button:hover {
   color: #020202a6;
 }
@@ -69,7 +73,7 @@ button {
 .post {
   width: 100%;
   margin-bottom: 30px;
-  animation: post-show .2s;
+  animation: post-show .6s;
 }
 
 .post .post-top-bar {

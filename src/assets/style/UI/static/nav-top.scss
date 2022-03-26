@@ -25,7 +25,7 @@
 		font-size: variables.$icon-button-size;
 	}
 	height: variables.$unified-nav-height;
-	min-height: fit-content;
+	min-height: variables.$min-nav-height;
 	width: 100%;
 	border-bottom: 2px solid variables.$c-contrast;
 }

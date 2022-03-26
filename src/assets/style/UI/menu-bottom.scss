@@ -10,6 +10,7 @@
 	grid-template-columns: 20% 20% 20% 20% 20%;
 	width: 100%;
 	height: variables.$unified-nav-height;
+	min-height: variables.$min-nav-height;
 	button {
 		span {
 			font-size: variables.$icon-button-size;

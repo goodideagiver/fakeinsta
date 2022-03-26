@@ -29,6 +29,7 @@ body {
 	overflow: hidden;
 	position: relative;
 	width: 100%;
+
 	.app-content {
 		overflow-y: scroll;
 		height: 100%;
@@ -38,5 +39,12 @@ body {
 			display: none;
 		}
 		scrollbar-width: none;*/
+	}
+}
+
+@media screen and (max-width: 501px) {
+	.main-app-window {
+		box-shadow: none;
+		border-radius: 0;
 	}
 }

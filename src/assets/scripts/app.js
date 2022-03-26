@@ -1,4 +1,4 @@
-import { Post } from './post/Post.js';
+import { RandomPost } from './post/RandomPost.js';
 import { Scroll } from './feed/Scroll.js';
 
 class App {
@@ -13,10 +13,9 @@ class App {
 
 	async addInitialPosts() {
 		for (let index = 0; index < 2; index++) {
-			await new Post().addRandomPost();
+			await new RandomPost().add();
 		}
 	}
 }
 
-console.log('siema');
 new App();

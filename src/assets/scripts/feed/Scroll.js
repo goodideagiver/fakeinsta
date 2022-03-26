@@ -1,4 +1,4 @@
-import { Post } from '../post/Post.js';
+import { RandomPost } from '../post/RandomPost.js';
 
 export class Scroll {
 	constructor() {
@@ -34,7 +34,7 @@ export class Scroll {
 
 		if (this.feedContainer.scrollTop > feedHeight - postFetchHeightThreshold) {
 			if (this.getMsFromLastFetch() > this.postFetchDelay) {
-				new Post().addRandomPost();
+				new RandomPost().add();
 				this.lastPhotoFetchTimestamp = Date.now();
 			} else if (this.getMsFromLastFetch() < this.postFetchDelay) {
 				setTimeout(() => {

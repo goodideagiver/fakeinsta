@@ -514,7 +514,7 @@ function hmrAcceptRun(bundle, id) {
 }
 
 },{}],"gJRPm":[function(require,module,exports) {
-var _postJs = require("./post/Post.js");
+var _randomPostJs = require("./post/RandomPost.js");
 var _scrollJs = require("./feed/Scroll.js");
 class App {
     constructor(elo){
@@ -525,67 +525,60 @@ class App {
         const sc = new _scrollJs.Scroll();
     }
     async addInitialPosts() {
-        for(let index = 0; index < 2; index++)await new _postJs.Post().addRandomPost();
+        for(let index = 0; index < 2; index++)await new _randomPostJs.RandomPost().add();
     }
 }
-console.log('siema');
 new App();
 
-},{"./post/Post.js":"dfYSB","./feed/Scroll.js":"7zfbI"}],"dfYSB":[function(require,module,exports) {
+},{"./feed/Scroll.js":"7zfbI","./post/RandomPost.js":"hJZoe"}],"7zfbI":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "Post", ()=>Post
+parcelHelpers.export(exports, "Scroll", ()=>Scroll
 );
-var _namesJs = require("./data/Names.js");
-var _descJs = require("./data/Desc.js");
-class Post {
-    constructor(username, description, image){
-        this.postTemplateEl = document.getElementById('post-template').content.cloneNode(true);
+var _randomPostJs = require("../post/RandomPost.js");
+class Scroll {
+    constructor(){
+        this.lastPhotoFetchTimestamp = -Infinity;
+        this.postFetchDelay = 500;
+        this.initFeedHandler();
     }
-    async fetchImage() {
-        const resp = await fetch('https://picsum.photos/200');
-        if (!resp.ok) return new URL(require("596d68d576073f51"));
-        return resp.url;
+    initFeedHandler() {
+        this.feedContainer = document.getElementById('app-content');
+        this.feedContainer.addEventListener('scroll', ()=>this.feedScrollHandler()
+        );
     }
-    generateDescPeekString(desc) {
-        const arr = desc.split(' ');
-        const peekArr = arr.map((sentence, id)=>{
-            if (id > 3) return;
-            else return sentence;
-        });
-        return peekArr.join(' ').trim() + '...';
+    getPostsHeight() {
+        const posts = [
+            ...document.querySelectorAll('.post')
+        ];
+        posts.forEach((post, id)=>posts[id] = post.offsetHeight
+        );
+        const height = posts.reduce((prev, curr)=>prev + curr
+        , 0);
+        return height;
     }
-    addHideDescButton(target) {
-        const hideDesc = document.createElement('span');
-        hideDesc.className = 'show-hide-btn-post';
-        hideDesc.textContent = ' hide';
-        hideDesc.addEventListener('click', ()=>{
-            hideDesc.closest('details').open = false;
-        });
-        target.append(hideDesc);
+    getLastPostHeight() {
+        const lastPost = document.querySelector('.post:last-child');
+        return lastPost.offsetHeight;
     }
-    async addRandomPost() {
-        const postImageURL = await this.fetchImage();
-        const profileImageURL = await this.fetchImage();
-        const appFeedHook = document.getElementById('app-content');
-        const username = _namesJs.getRandomName();
-        const desc = _descJs.getRandomSentence();
-        const postEl = this.postTemplateEl.cloneNode(true);
-        postEl.querySelector('.post-photo img').src = postImageURL;
-        postEl.querySelector('.post-user-img img').src = profileImageURL;
-        postEl.querySelector('.post-user-name').textContent = username;
-        postEl.querySelector('.summary-username').textContent = username;
-        postEl.querySelector('.details-username').textContent = username;
-        const descEl = postEl.querySelector('.description');
-        descEl.textContent = desc;
-        this.addHideDescButton(descEl);
-        postEl.querySelector('summary span').textContent = this.generateDescPeekString(desc);
-        postEl.querySelector('.like-count span').textContent = (Math.random() * 1000000).toFixed(0).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
-        await appFeedHook.append(postEl);
+    getMsFromLastFetch() {
+        return Date.now() - this.lastPhotoFetchTimestamp;
+    }
+    feedScrollHandler() {
+        const feedHeight = this.getPostsHeight();
+        const postFetchHeightThreshold = this.getLastPostHeight() * 1.4;
+        if (this.feedContainer.scrollTop > feedHeight - postFetchHeightThreshold) {
+            if (this.getMsFromLastFetch() > this.postFetchDelay) {
+                new _randomPostJs.RandomPost().add();
+                this.lastPhotoFetchTimestamp = Date.now();
+            } else if (this.getMsFromLastFetch() < this.postFetchDelay) setTimeout(()=>{
+                this.feedScrollHandler();
+            }, this.postFetchDelay - this.getMsFromLastFetch());
+        }
     }
 }
 
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","./data/Names.js":"8Jz8L","./data/Desc.js":"hp7bG","596d68d576073f51":"6GlWr"}],"gkKU3":[function(require,module,exports) {
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","../post/RandomPost.js":"hJZoe"}],"gkKU3":[function(require,module,exports) {
 exports.interopDefault = function(a) {
     return a && a.__esModule ? a : {
         default: a
@@ -614,6 +607,109 @@ exports.export = function(dest, destName, get) {
         get: get
     });
 };
+
+},{}],"hJZoe":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "RandomPost", ()=>RandomPost
+);
+var _namesJs = require("./data/Names.js");
+var _descJs = require("./data/Desc.js");
+var _postUtilsJs = require("./PostUtils.js");
+class RandomPost extends _postUtilsJs.PostUtils {
+    constructor(){
+        super();
+    }
+    async add() {
+        const postImageURL = await this.fetchImage();
+        const profileImageURL = await this.fetchImage();
+        const appFeedHook = document.getElementById('app-content');
+        const username = _namesJs.getRandomName();
+        const desc = _descJs.getRandomSentence();
+        const postEl = this.postTemplateEl;
+        postEl.querySelector('.post-photo img').src = postImageURL;
+        postEl.querySelector('.post-user-img img').src = profileImageURL;
+        postEl.querySelector('.post-user-name').textContent = username;
+        postEl.querySelector('.summary-username').textContent = username;
+        postEl.querySelector('.details-username').textContent = username;
+        const descEl = postEl.querySelector('.description');
+        descEl.textContent = desc;
+        this.addHideDescButton(descEl);
+        postEl.querySelector('summary span').textContent = this.generateDescPeekString(desc);
+        postEl.querySelector('.like-count span').textContent = (Math.random() * 1000000).toFixed(0).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
+        await appFeedHook.append(postEl);
+    }
+}
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","./PostUtils.js":"izjbP","./data/Names.js":"8Jz8L","./data/Desc.js":"hp7bG"}],"izjbP":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "PostUtils", ()=>PostUtils
+);
+class PostUtils {
+    constructor(){
+        this.postTemplateEl = document.getElementById('post-template').content.cloneNode(true);
+    }
+    async fetchImage() {
+        const resp = await fetch('https://picsum.photos/200');
+        if (!resp.ok) return new URL(require("e87461f31f62f5eb"));
+        return resp.url;
+    }
+    generateDescPeekString(desc) {
+        const arr = desc.split(' ');
+        const peekArr = arr.map((sentence, id)=>{
+            if (id > 3) return;
+            else return sentence;
+        });
+        return peekArr.join(' ').trim() + '...';
+    }
+    addHideDescButton(target) {
+        const hideDesc = document.createElement('span');
+        hideDesc.className = 'show-hide-btn-post';
+        hideDesc.textContent = ' hide';
+        hideDesc.addEventListener('click', ()=>{
+            hideDesc.closest('details').open = false;
+        });
+        target.append(hideDesc);
+    }
+}
+
+},{"e87461f31f62f5eb":"6GlWr","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"6GlWr":[function(require,module,exports) {
+module.exports = require('./helpers/bundle-url').getBundleURL('8e1QZ') + "placeholder.3f6dbcbe.webp" + "?" + Date.now();
+
+},{"./helpers/bundle-url":"lgJ39"}],"lgJ39":[function(require,module,exports) {
+"use strict";
+var bundleURL = {};
+function getBundleURLCached(id) {
+    var value = bundleURL[id];
+    if (!value) {
+        value = getBundleURL();
+        bundleURL[id] = value;
+    }
+    return value;
+}
+function getBundleURL() {
+    try {
+        throw new Error();
+    } catch (err) {
+        var matches = ('' + err.stack).match(/(https?|file|ftp):\/\/[^)\n]+/g);
+        if (matches) // The first two stack frames will be this function and getBundleURLCached.
+        // Use the 3rd one, which will be a runtime in the original bundle.
+        return getBaseURL(matches[2]);
+    }
+    return '/';
+}
+function getBaseURL(url) {
+    return ('' + url).replace(/^((?:https?|file|ftp):\/\/.+)\/[^/]+$/, '$1') + '/';
+} // TODO: Replace uses with `new URL(url).origin` when ie11 is no longer supported.
+function getOrigin(url) {
+    var matches = ('' + url).match(/(https?|file|ftp):\/\/[^/]+/);
+    if (!matches) throw new Error('Origin not found');
+    return matches[0];
+}
+exports.getBundleURL = getBundleURLCached;
+exports.getBaseURL = getBaseURL;
+exports.getOrigin = getOrigin;
 
 },{}],"8Jz8L":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
@@ -2886,91 +2982,6 @@ function getRandomSentence() {
     return wordArray[Math.floor(wordArray.length * Math.random())];
 }
 
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"6GlWr":[function(require,module,exports) {
-module.exports = require('./helpers/bundle-url').getBundleURL('8e1QZ') + "placeholder.3f6dbcbe.webp" + "?" + Date.now();
-
-},{"./helpers/bundle-url":"lgJ39"}],"lgJ39":[function(require,module,exports) {
-"use strict";
-var bundleURL = {};
-function getBundleURLCached(id) {
-    var value = bundleURL[id];
-    if (!value) {
-        value = getBundleURL();
-        bundleURL[id] = value;
-    }
-    return value;
-}
-function getBundleURL() {
-    try {
-        throw new Error();
-    } catch (err) {
-        var matches = ('' + err.stack).match(/(https?|file|ftp):\/\/[^)\n]+/g);
-        if (matches) // The first two stack frames will be this function and getBundleURLCached.
-        // Use the 3rd one, which will be a runtime in the original bundle.
-        return getBaseURL(matches[2]);
-    }
-    return '/';
-}
-function getBaseURL(url) {
-    return ('' + url).replace(/^((?:https?|file|ftp):\/\/.+)\/[^/]+$/, '$1') + '/';
-} // TODO: Replace uses with `new URL(url).origin` when ie11 is no longer supported.
-function getOrigin(url) {
-    var matches = ('' + url).match(/(https?|file|ftp):\/\/[^/]+/);
-    if (!matches) throw new Error('Origin not found');
-    return matches[0];
-}
-exports.getBundleURL = getBundleURLCached;
-exports.getBaseURL = getBaseURL;
-exports.getOrigin = getOrigin;
-
-},{}],"7zfbI":[function(require,module,exports) {
-var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "Scroll", ()=>Scroll
-);
-var _postJs = require("../post/Post.js");
-class Scroll {
-    constructor(){
-        this.lastPhotoFetchTimestamp = -Infinity;
-        this.postFetchDelay = 500;
-        this.initFeedHandler();
-    }
-    initFeedHandler() {
-        this.feedContainer = document.getElementById('app-content');
-        this.feedContainer.addEventListener('scroll', ()=>this.feedScrollHandler()
-        );
-    }
-    getPostsHeight() {
-        const posts = [
-            ...document.querySelectorAll('.post')
-        ];
-        posts.forEach((post, id)=>posts[id] = post.offsetHeight
-        );
-        const height = posts.reduce((prev, curr)=>prev + curr
-        , 0);
-        return height;
-    }
-    getLastPostHeight() {
-        const lastPost = document.querySelector('.post:last-child');
-        return lastPost.offsetHeight;
-    }
-    getMsFromLastFetch() {
-        return Date.now() - this.lastPhotoFetchTimestamp;
-    }
-    feedScrollHandler() {
-        const feedHeight = this.getPostsHeight();
-        const postFetchHeightThreshold = this.getLastPostHeight() * 1.4;
-        if (this.feedContainer.scrollTop > feedHeight - postFetchHeightThreshold) {
-            if (this.getMsFromLastFetch() > this.postFetchDelay) {
-                new _postJs.Post().addRandomPost();
-                this.lastPhotoFetchTimestamp = Date.now();
-            } else if (this.getMsFromLastFetch() < this.postFetchDelay) setTimeout(()=>{
-                this.feedScrollHandler();
-            }, this.postFetchDelay - this.getMsFromLastFetch());
-        }
-    }
-}
-
-},{"../post/Post.js":"dfYSB","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}]},["2G3IT","gJRPm"], "gJRPm", "parcelRequireab7b")
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}]},["2G3IT","gJRPm"], "gJRPm", "parcelRequireab7b")
 
 //# sourceMappingURL=index.c574a7e0.js.map

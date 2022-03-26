@@ -22,6 +22,10 @@ body {
   font-size: 2rem;
 }
 
+.nav-bottom button:hover span {
+  color: #020202a6;
+}
+
 button {
   cursor: pointer;
 }
@@ -161,6 +165,17 @@ button {
   to {
     opacity: 1;
   }
+}
+
+.button-post-option {
+  cursor: pointer;
+  color: #020202;
+  font-weight: bold;
+  display: inline;
+}
+
+.button-post-option:hover {
+  color: #020202a6;
 }
 
 * {

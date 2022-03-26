@@ -94,3 +94,13 @@
 		opacity: 1;
 	}
 }
+
+.button-post-option {
+	cursor: pointer;
+	color: $c-main-font-icon;
+	font-weight: bold;
+	display: inline;
+	&:hover {
+		color: rgba($color: $c-main-font-icon, $alpha: 0.65);
+	}
+}

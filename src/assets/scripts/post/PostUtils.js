@@ -26,7 +26,15 @@ export class PostUtils {
 	set desc(desc) {
 		const descEl = this.postTemplateEl.querySelector('.description');
 		descEl.textContent = desc;
-		this.addHideDescButton(descEl);
+		if (desc.trim().length > 0) {
+			this.addHideDescButton(descEl);
+			this.setDescSummary(desc);
+		} else {
+			this.postTemplateEl.querySelector('.show-hide-btn-pos').remove();
+		}
+	}
+
+	setDescSummary(desc) {
 		this.postTemplateEl.querySelector('summary span').textContent =
 			this.generateDescPeekString(desc);
 	}

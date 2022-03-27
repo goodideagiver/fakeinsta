@@ -1,5 +1,6 @@
 import { RandomPost } from './post/RandomPost.js';
 import { Scroll } from './feed/Scroll.js';
+import { NavBottom } from './nav/navBottom.js';
 
 class App {
 	constructor() {
@@ -9,6 +10,7 @@ class App {
 
 	init() {
 		const sc = new Scroll();
+		new NavBottom();
 	}
 
 	async addInitialPosts() {

@@ -2,7 +2,7 @@ import { RandomPost } from './post/RandomPost.js';
 import { Scroll } from './feed/Scroll.js';
 
 class App {
-	constructor(elo) {
+	constructor() {
 		this.addInitialPosts();
 		this.init();
 	}

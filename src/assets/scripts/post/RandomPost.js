@@ -1,10 +1,11 @@
 import { getRandomName } from './data/Names.js';
 import { getRandomSentence } from './data/Desc.js';
 import { PostUtils } from './PostUtils.js';
+import { getRandomInt } from '../utility/Utility.js';
 
 export class RandomPost extends PostUtils {
 	constructor() {
-		super(getRandomName(), getRandomSentence(), (Math.random() * 1000000).toFixed(0));
+		super(getRandomName(), getRandomSentence(), getRandomInt(0, 1000000));
 	}
 
 	async add() {

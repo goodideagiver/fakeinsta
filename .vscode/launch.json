@@ -13,7 +13,8 @@
 			"sourceMapPathOverrides": {
 				"../*": "${webRoot}/*",
 				"/__parcel_source_root/*": "${webRoot}/*"
-			}
+			},
+			"runtimeArgs": ["debug"]
 		}
 	]
 }

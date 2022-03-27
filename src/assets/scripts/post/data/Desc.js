@@ -252,5 +252,6 @@ It's always a good idea to seek shelter from the evil gaze of the sun.`;
 const wordArray = desc.split('\n');
 
 export function getRandomSentence() {
-	return wordArray[Math.floor(wordArray.length * Math.random())];
+	const randomIndex = Math.floor(Math.random() * wordArray.length);
+	return wordArray[randomIndex];
 }

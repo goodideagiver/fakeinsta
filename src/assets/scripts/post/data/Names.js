@@ -2002,5 +2002,5 @@ const names = [
 ];
 
 export function getRandomName() {
-	return names[(Math.random() * (names.length - 1)).toFixed(0)];
+	return names[Math.floor(Math.random() * names.length)];
 }

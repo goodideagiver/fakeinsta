@@ -43,15 +43,13 @@ export class PostUtils {
 	}
 
 	generateDescPeekString(desc) {
-		const arr = desc.split(' ');
-		const peekArr = arr.map((sentence, id) => {
-			if (id > 3) {
-				return;
-			} else {
-				return sentence;
-			}
-		});
-		return peekArr.join(' ').trim() + '...';
+		if (desc.trim().length > 0) {
+			const arr = desc.split(' ');
+			const firstThreeWords = arr.slice(0, 3);
+			return firstThreeWords.join(' ') + '...';
+		} else {
+			return '';
+		}
 	}
 
 	addHideDescButton(target) {

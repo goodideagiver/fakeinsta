@@ -1,3 +1,6 @@
+import { fetchCatPhoto, fetchPhoto } from './data/RandomPhoto.js';
+import { getRandomInt } from '../utility/Utility.js';
+
 export class PostUtils {
 	constructor(username, description = '', likes = 0) {
 		this.postTemplateEl = document
@@ -40,14 +43,12 @@ export class PostUtils {
 	}
 
 	async fetchImage(px = 200) {
-		const resp = await fetch(`https://picsum.photos/${px}`);
-		if (!resp.ok) {
-			return new URL(
-				'../../img/post/placeholder.jpg?as=webp&width=250',
-				import.meta.url
-			);
+		const pickNumber = getRandomInt(0, 15);
+		if (pickNumber === 0) {
+			return await fetchCatPhoto(px);
+		} else {
+			return await fetchPhoto(px);
 		}
-		return resp.url;
 	}
 
 	generateDescPeekString(desc) {

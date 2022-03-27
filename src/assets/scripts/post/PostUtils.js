@@ -60,13 +60,13 @@ export class PostUtils {
 		}
 	}
 
-	addHideDescButton(target) {
+	addHideDescButton(descriptionEl) {
 		const hideDesc = document.createElement('span');
 		hideDesc.className = 'show-hide-btn-post';
 		hideDesc.textContent = ' hide';
 		hideDesc.addEventListener('click', () => {
 			hideDesc.closest('details').open = false;
 		});
-		target.append(hideDesc);
+		descriptionEl.append(hideDesc);
 	}
 }

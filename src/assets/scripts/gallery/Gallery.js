@@ -3,6 +3,7 @@ export class Gallery {
 		this.galleryElement = document
 			.getElementById('gallery-template')
 			.content.cloneNode(true);
+		console.log('galery initialized');
 	}
 
 	initGallery() {}

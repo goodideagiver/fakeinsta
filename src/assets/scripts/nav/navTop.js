@@ -1,4 +1,5 @@
 export class NavTop {
+	galleryObject;
 	constructor() {
 		this.navHook = document.querySelector('.main-nav');
 		this.navItems = [...this.navHook.querySelectorAll('button')];
@@ -7,11 +8,19 @@ export class NavTop {
 	}
 
 	clickBtnHandler(e) {
+		e.stopPropagation();
 		const button = e.target.closest('button');
 		if (this.navItems.includes(button)) {
 			switch (this.navItems.indexOf(button)) {
 				case 0:
-					console.log('dodaj');
+					if (!this.galleryObject) {
+						import('../gallery/Gallery.js').then(gall => {
+							this.galleryObject = new gall.Gallery();
+						});
+						return;
+					} else {
+						console.dir(this.galleryObject);
+					}
 					break;
 				case 1:
 					console.log('lajki');

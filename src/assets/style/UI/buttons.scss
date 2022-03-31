@@ -6,7 +6,8 @@ button {
 }
 
 .main-nav,
-.nav-bottom {
+.nav-bottom,
+.post {
 	button {
 		padding: 5px;
 		color: variables.$c-main-font-icon;
@@ -15,6 +16,9 @@ button {
 		}
 		&:hover {
 			color: rgba(variables.$c-main-font-icon, $alpha: 0.65);
+			span {
+				color: rgba(variables.$c-main-font-icon, $alpha: 0.65);
+			}
 		}
 	}
 }

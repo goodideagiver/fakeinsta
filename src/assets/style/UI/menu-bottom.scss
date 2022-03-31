@@ -15,11 +15,5 @@
 		span {
 			font-size: variables.$icon-button-size;
 		}
-		//hover effects
-		&:hover {
-			span {
-				color: rgba(variables.$c-main-font-icon, $alpha: 0.65);
-			}
-		}
 	}
 }

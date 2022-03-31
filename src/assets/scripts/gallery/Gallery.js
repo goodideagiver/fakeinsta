@@ -1,12 +1,28 @@
 export class Gallery {
+	#photoUrlArr = [];
 	constructor() {
 		this.galleryElement = document
 			.getElementById('gallery-template')
 			.content.cloneNode(true);
-		console.log('galery initialized');
+
+		this.initGallery();
 	}
 
-	initGallery() {}
+	createGalleryElement() {}
+
+	show() {}
+
+	hide() {}
+
+	async initGallery() {
+		//downloads photos, creates gallery element and shows gallery after element creation
+		const start = performance.now();
+		const photoUrlArray = await this.fetchGalleryPhotos();
+		console.log(photoUrlArray);
+		console.log(performance.now() - start);
+		this.#photoUrlArr = photoUrlArray;
+		this.show();
+	}
 
 	async createGalleryElementsArray() {
 		const photos = await this.fetchGalleryPhotos();

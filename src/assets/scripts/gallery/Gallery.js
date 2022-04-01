@@ -1,10 +1,11 @@
+import { populateUrlArray } from './ImageUrlList';
+
 export class Gallery {
-	#photoUrlArr = [];
+	#photoUrlArr;
 	constructor() {
 		this.galleryElement = document
 			.getElementById('gallery-template')
 			.content.cloneNode(true);
-
 		this.initGallery();
 	}
 
@@ -16,11 +17,13 @@ export class Gallery {
 
 	async initGallery() {
 		//downloads photos, creates gallery element and shows gallery after element creation
-		const start = performance.now();
-		const photoUrlArray = await this.fetchGalleryPhotos();
-		console.log(photoUrlArray);
-		console.log(performance.now() - start);
-		this.#photoUrlArr = photoUrlArray;
+		// const start = performance.now();
+		// const photoUrlArray = await this.fetchGalleryPhotos();
+		// console.log(photoUrlArray);
+		// console.log(performance.now() - start);
+		// this.#photoUrlArr = photoUrlArray;
+		this.#photoUrlArr = await populateUrlArray(15);
+		console.log(this.#photoUrlArr);
 		this.show();
 	}
 
@@ -39,10 +42,10 @@ export class Gallery {
 	}
 
 	async fetchGalleryPhotos() {
-		const photos = [];
-		for (let i = 0; i < 20; i++) {
-			photos.push(await this.fetchImage(150));
-		}
-		return photos;
+		// const photos = [];
+		// for (let i = 0; i < 20; i++) {
+		// 	photos.push(await this.fetchImage(150));
+		// }
+		// return photos;
 	}
 }

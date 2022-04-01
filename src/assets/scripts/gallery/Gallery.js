@@ -1,4 +1,4 @@
-import { populateUrlArray } from './ImageUrlList';
+import { urlArray } from './ImageUrlList';
 
 export class Gallery {
 	#photoUrlArr;
@@ -26,8 +26,7 @@ export class Gallery {
 	hide() {}
 
 	async initGallery() {
-		this.#photoUrlArr = await populateUrlArray(15);
-		console.log(this.#photoUrlArr);
+		this.#photoUrlArr = urlArray;
 		const galleryEl = this.createGalleryElement();
 		document.body.appendChild(galleryEl);
 	}

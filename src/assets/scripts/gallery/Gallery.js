@@ -3,49 +3,54 @@ import { populateUrlArray } from './ImageUrlList';
 export class Gallery {
 	#photoUrlArr;
 	constructor() {
-		this.galleryElement = document
-			.getElementById('gallery-template')
-			.content.cloneNode(true);
 		this.initGallery();
 	}
 
-	createGalleryElement() {}
+	createGalleryElement() {
+		const galleryTemplate = document
+			.getElementById('gallery-template')
+			.content.cloneNode(true);
+		const galleryGrid = galleryTemplate.querySelector('.gallery-grid');
+		this.addPhotosToGallery(this.createGalleryElementsArray(), galleryGrid);
+		return galleryTemplate;
+	}
+
+	addPhotosToGallery(photosEls, galleryHook) {
+		photosEls.forEach(photoEl => {
+			galleryHook.appendChild(photoEl);
+		});
+	}
 
 	show() {}
 
 	hide() {}
 
 	async initGallery() {
-		//downloads photos, creates gallery element and shows gallery after element creation
-		// const start = performance.now();
-		// const photoUrlArray = await this.fetchGalleryPhotos();
-		// console.log(photoUrlArray);
-		// console.log(performance.now() - start);
-		// this.#photoUrlArr = photoUrlArray;
 		this.#photoUrlArr = await populateUrlArray(15);
 		console.log(this.#photoUrlArr);
-		this.show();
+		const galleryEl = this.createGalleryElement();
+		document.body.appendChild(galleryEl);
 	}
 
-	async createGalleryElementsArray() {
-		const photos = await this.fetchGalleryPhotos();
-		const photoElements = photos.map(photoUrl => {
+	createGalleryElementsArray() {
+		const photoElements = this.#photoUrlArr.map(photoUrl => {
 			const photoEl = document.createElement('img');
-			photoEl.src = photoUrl;
+			photoEl.src = photoUrl.href;
 			return photoEl;
 		});
+		return photoElements;
 	}
 
-	async fetchImage(px = 150) {
-		const resp = await fetch(`https://picsum.photos/${px}`);
-		return resp.url;
-	}
+	// async fetchImage(px = 150) {
+	// 	const resp = await fetch(`https://picsum.photos/${px}`);
+	// 	return resp.url;
+	// }
 
-	async fetchGalleryPhotos() {
-		// const photos = [];
-		// for (let i = 0; i < 20; i++) {
-		// 	photos.push(await this.fetchImage(150));
-		// }
-		// return photos;
-	}
+	// async fetchGalleryPhotos() {
+	// 	const photos = [];
+	// 	for (let i = 0; i < 20; i++) {
+	// 		photos.push(await this.fetchImage(150));
+	// 	}
+	// 	return photos;
+	// }
 }

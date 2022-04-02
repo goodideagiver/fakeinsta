@@ -21,17 +21,20 @@ export class Gallery {
 		});
 	}
 
-	show() {}
-
 	hide() {
-		console.log(this.galleryEl);
 		this.galleryEl.remove();
 		this.galleryEl = null;
 	}
 
 	pickPhoto(url) {
-		console.log('picked photo url = ', url);
-		this.hide();
+		import('../pickPhoto/PickPhoto.js')
+			.then(p => {
+				new p.PickPhoto(url);
+				this.hide();
+			})
+			.catch(err => {
+				console.error('there was problem when picking photo', err);
+			});
 	}
 
 	async initGallery() {

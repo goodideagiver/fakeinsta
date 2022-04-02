@@ -2,14 +2,15 @@ import { fetchCatPhoto, fetchPhoto } from './data/RandomPhoto.js';
 import { getRandomInt } from '../utility/Utility.js';
 
 export class PostUtils {
+	#username;
 	constructor(username, description = '', likes = 0) {
 		this.postTemplateEl = document
 			.getElementById('post-template')
 			.content.cloneNode(true);
 		this.username = username;
-		if (description) {
-			this.desc = description;
-		}
+
+		this.desc = description;
+
 		this.likeCount = likes;
 		this.feedHook = document.getElementById('app-content');
 	}
@@ -24,6 +25,11 @@ export class PostUtils {
 		this.postTemplateEl.querySelector('.post-user-name').textContent = username;
 		this.postTemplateEl.querySelector('.summary-username').textContent = username;
 		this.postTemplateEl.querySelector('.details-username').textContent = username;
+		this.#username = username;
+	}
+
+	get username() {
+		return this.#username;
 	}
 
 	set desc(desc) {
@@ -33,7 +39,12 @@ export class PostUtils {
 			this.addHideDescButton(descEl);
 			this.setDescSummary(desc);
 		} else {
-			this.postTemplateEl.querySelector('.show-hide-btn-pos').remove();
+			// this.postTemplateEl.querySelector('.show-hide-btn-pos').remove();
+			this.postTemplateEl.querySelector('details').remove();
+			const usernameEl = document.createElement('h2');
+			console.log(this.username);
+			usernameEl.textContent = this.username;
+			this.postTemplateEl.querySelector('.post-desc').append(usernameEl);
 		}
 	}
 

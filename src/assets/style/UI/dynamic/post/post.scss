@@ -38,6 +38,9 @@
 		padding: 0 2%;
 	}
 	.post-desc {
+		h2 {
+			font-size: 1rem;
+		}
 		details {
 			.details-username {
 				font-weight: bold;
@@ -55,9 +58,6 @@
 			align-items: baseline;
 			gap: 0.3rem;
 			* {
-				font-size: 1rem;
-			}
-			h2 {
 				font-size: 1rem;
 			}
 		}

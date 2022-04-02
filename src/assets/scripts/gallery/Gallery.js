@@ -23,18 +23,34 @@ export class Gallery {
 
 	show() {}
 
-	hide() {}
+	hide() {
+		console.log(this.galleryEl);
+		this.galleryEl.remove();
+		this.galleryEl = null;
+	}
+
+	pickPhoto(url) {
+		console.log('picked photo url = ', url);
+		this.hide();
+	}
 
 	async initGallery() {
 		this.#photoUrlArr = urlArray;
-		const galleryEl = this.createGalleryElement();
-		document.getElementById('app').appendChild(galleryEl);');
+		this.galleryEl = this.createGalleryElement();
+		this.galleryEl
+			.querySelector('button')
+			.addEventListener('click', () => this.hide());
+		document.getElementById('app').appendChild(this.galleryEl);
+		this.galleryEl = document.querySelector('.gallery');
 	}
 
 	createGalleryElementsArray() {
 		const photoElements = this.#photoUrlArr.map(photoUrl => {
 			const photoEl = document.createElement('img');
 			photoEl.src = photoUrl.href;
+			photoEl.addEventListener('click', () => {
+				this.pickPhoto(photoUrl);
+			});
 			return photoEl;
 		});
 		return photoElements;

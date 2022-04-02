@@ -19,7 +19,7 @@ export class NavTop {
 						});
 						return;
 					} else {
-						console.dir(this.galleryObject);
+						this.galleryObject.initGallery();
 					}
 					break;
 				case 1:

@@ -28,7 +28,7 @@ export class Gallery {
 	async initGallery() {
 		this.#photoUrlArr = urlArray;
 		const galleryEl = this.createGalleryElement();
-		document.body.appendChild(galleryEl);
+		document.getElementById('app').appendChild(galleryEl);');
 	}
 
 	createGalleryElementsArray() {

@@ -13,13 +13,14 @@ export class Scroll {
 		this.feedContainer.addEventListener('scroll', () => this.feedScrollHandler());
 	}
 
-	feedScrollHandler() {
+	async feedScrollHandler() {
 		const feedHeight = FeedUtil.getFeedHeight();
 		const postFetchHeightThreshold = FeedUtil.getLastPostHeight() * 1.4;
 
 		if (this.feedContainer.scrollTop > feedHeight - postFetchHeightThreshold) {
 			if (FeedUtil.timestampDiffNow(this.fetchTimestamp) > this.postFetchDelay) {
-				new RandomPost().add();
+				this.fetchTimestamp = Infinity;
+				await new RandomPost().add();
 				this.fetchTimestamp = Date.now();
 			} else if (
 				FeedUtil.timestampDiffNow(this.fetchTimestamp) < this.postFetchDelay

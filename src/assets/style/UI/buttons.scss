@@ -22,3 +22,15 @@ button {
 		}
 	}
 }
+
+.blue-button {
+	height: fit-content;
+	color: adjust-color($color: blue, $saturation: 50%, $lightness: 0%, $alpha: 0.8);
+	font-size: 1.3rem;
+	// padding: 2rem 1rem;
+	font-weight: bold;
+	//light hover
+	&:hover {
+		color: adjust-color($color: blue, $saturation: 50%, $lightness: +20%, $alpha: 1);
+	}
+}

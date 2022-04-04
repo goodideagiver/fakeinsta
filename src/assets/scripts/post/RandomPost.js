@@ -19,10 +19,11 @@ export class RandomPost extends PostUtils {
 
 	async add() {
 		const postImageURL = await this.fetchImage(200);
-		const profileImageURL = await this.fetchImage(40);
+		this.profileImageURL = await this.fetchImage(40);
 
 		this.postTemplateEl.querySelector('.post-photo img').src = postImageURL;
-		this.postTemplateEl.querySelector('.post-user-img img').src = profileImageURL;
+		this.postTemplateEl.querySelector('.post-user-img img').src =
+			this.profileImageURL;
 
 		await this.addRandomComments();
 		this.feedHook.append(this.postTemplateEl);

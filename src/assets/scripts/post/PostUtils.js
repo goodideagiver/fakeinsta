@@ -3,6 +3,7 @@ import { getRandomInt } from '../utility/Utility.js';
 export class PostUtils {
 	viewCommentsEl;
 	#username;
+	#desc;
 	comments = [];
 
 	constructor(username, description = '', likes = 0) {
@@ -12,10 +13,13 @@ export class PostUtils {
 		this.username = username;
 
 		this.desc = description;
-
+		const pfp = this.profileImageURL
+			? this.profileImageURL
+			: 'https://picsum.photos/200';
 		this.likeCount = likes;
 		this.feedHook = document.getElementById('app-content');
 		this.#initButtons();
+		this.addComment(this.username, this.#desc, pfp);
 	}
 
 	#initButtons() {
@@ -29,7 +33,10 @@ export class PostUtils {
 	addComment(username, comment, imageURL) {
 		if (!username || !comment || !imageURL) {
 			throw new Error(
-				'Username, comment text, and profle image url is REQUIRED to add a comment to a post'
+				`Username, comment text, and profle image url is REQUIRED to add a comment to a post
+				Username: ${username}
+				commentText: ${comment}
+				imageURL: ${imageURL}`
 			);
 			return;
 		}
@@ -76,6 +83,10 @@ export class PostUtils {
 		if (desc.trim().length > 0) {
 			this.addHideDescButton(descEl);
 			this.setDescSummary(desc);
+
+			this.#desc = desc;
+			// console.log(this);
+			// this.addComment(this.username, desc, pfp);
 		} else {
 			// this.postTemplateEl.querySelector('.show-hide-btn-pos').remove();
 			this.postTemplateEl.querySelector('details').remove();

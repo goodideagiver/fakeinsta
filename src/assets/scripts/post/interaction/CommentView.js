@@ -3,18 +3,27 @@ export class CommentView {
 	#commentViewElement;
 
 	constructor(commentArray, parentPostClass) {
-		console.log(commentArray);
+		// console.log(commentArray);
 		const comments = commentArray.map(comment => this.createCommentElement(comment));
+		this.createCommentViewElement(comments);
+		this.render();
 	}
 
-	createCommentElement(comment) {
+	createCommentElement(comment, isFirst) {
 		const wrapper = document.createElement('div');
 		const commentEl = document.createElement('span');
 		const userEl = document.createElement('span');
+		const userPhoto = document.createElement('img');
 
 		commentEl.textContent = comment.text;
 		userEl.textContent = comment.username;
+		userPhoto.src = comment.imgURL;
 
+		wrapper.className = 'comment-interface';
+		if (isFirst) {
+			wrapper.classList.add('top-comment');
+		}
+		wrapper.append(userPhoto, userEl, commentEl);
 		return wrapper;
 	}
 
@@ -23,15 +32,23 @@ export class CommentView {
 			.getElementById('comment-view-template')
 			.content.cloneNode(true);
 		this.commentViewEl = commentViewTemplate;
+		this.commentViewEl.querySelector('.comments').append(...commentElements);
+		this.initCommentViewInterface();
 	}
 
 	close() {
-		this.commentViewEl.remove();
+		document.querySelector('.comment-view').remove();
 		this.commentViewEl = null;
+	}
+
+	initCommentViewInterface() {
+		this.commentViewEl
+			.querySelector('.back')
+			.addEventListener('click', this.close.bind(this));
 	}
 
 	render() {
 		const appHook = document.getElementById('app');
-		appHook.append(this.commentViewEl);
+		appHook.appendChild(this.commentViewEl);
 	}
 }

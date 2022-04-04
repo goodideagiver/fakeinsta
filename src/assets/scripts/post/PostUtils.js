@@ -15,17 +15,32 @@ export class PostUtils {
 
 		this.likeCount = likes;
 		this.feedHook = document.getElementById('app-content');
+		this.#initButtons();
+	}
+
+	#initButtons() {
+		this.postTemplateEl
+			.querySelector('.comment')
+			.addEventListener('click', this.viewComments.bind(this));
+		this.postTemplateEl
+			.querySelector('.post-comments')
+			.addEventListener('click', this.viewComments.bind(this));
 	}
 
 	addComment(username, comment) {
 		this.comments.push({ username: username, text: comment });
+		this.commentCount = this.comments.length;
 	}
 
 	viewComments() {
 		new CommentView(this.comments, this);
 	}
 
-	renderCommentCount() {}
+	set commentCount(count) {
+		//updates comment count on feed view of the post
+		const commentString = count > 0 ? `<b>View ${count} comments</b>` : '';
+		this.postTemplateEl.querySelector('.post-comments').innerHTML = commentString;
+	}
 
 	set likeCount(likeAmount) {
 		this.postTemplateEl.querySelector('.like-count span').textContent = likeAmount
@@ -67,7 +82,7 @@ export class PostUtils {
 
 	async fetchImage(px = 200) {
 		const pickNumber = getRandomInt(0, 15);
-		if (pickNumber === 0) {
+		if (pickNumber > 11) {
 			return await fetchCatPhoto(px);
 		} else {
 			return await fetchPhoto(px);

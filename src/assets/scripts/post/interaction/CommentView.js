@@ -3,7 +3,8 @@ export class CommentView {
 	#commentViewElement;
 
 	constructor(commentArray, parentPostClass) {
-		console.log(commentArray, parentPostClass);
+		console.log(commentArray);
+		const comments = commentArray.map(comment => this.createCommentElement(comment));
 	}
 
 	createCommentElement(comment) {
@@ -14,8 +15,17 @@ export class CommentView {
 		commentEl.textContent = comment.text;
 		userEl.textContent = comment.username;
 
-		return;
+		return wrapper;
 	}
+
+	createCommentViewElement(commentElements) {
+		const commentViewTemplate = document
+			.getElementById('comment-view-template')
+			.content.cloneNode(true);
+		return commentViewTemplate;
+	}
+
+	close() {}
 
 	render() {}
 }

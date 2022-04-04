@@ -2,6 +2,7 @@ import { fetchCatPhoto, fetchPhoto } from './data/RandomPhoto.js';
 import { getRandomInt } from '../utility/Utility.js';
 
 export class PostUtils {
+	comments = [];
 	#username;
 	constructor(username, description = '', likes = 0) {
 		this.postTemplateEl = document
@@ -13,6 +14,10 @@ export class PostUtils {
 
 		this.likeCount = likes;
 		this.feedHook = document.getElementById('app-content');
+	}
+
+	addComment(username, comment) {
+		this.comments.push({ username: username, text: comment });
 	}
 
 	set likeCount(likeAmount) {

@@ -23,6 +23,16 @@
 		}
 	}
 	.comments {
+		.comment-interface {
+			&:first-child {
+				border-bottom: 1px $c-gray-text solid;
+				img {
+					border: 3px $c-gray-text solid;
+					padding: 2px;
+					object-fit: cover;
+				}
+			}
+		}
 		height: 100%;
 	}
 	nav.comment-interface {
@@ -46,6 +56,7 @@
 		align-items: center;
 		img {
 			width: 100%;
+			aspect-ratio: 1/1;
 			border-radius: 50px;
 			padding: 5px;
 		}

@@ -9,7 +9,7 @@ export class CommentView {
 		this.render();
 	}
 
-	createCommentElement(comment, isFirst) {
+	createCommentElement(comment) {
 		const wrapper = document.createElement('div');
 		const commentEl = document.createElement('span');
 		const userEl = document.createElement('span');
@@ -20,9 +20,6 @@ export class CommentView {
 		userPhoto.src = comment.imgURL;
 
 		wrapper.className = 'comment-interface';
-		if (isFirst) {
-			wrapper.classList.add('top-comment');
-		}
 		wrapper.append(userPhoto, userEl, commentEl);
 		return wrapper;
 	}

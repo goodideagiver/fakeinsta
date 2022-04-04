@@ -31,9 +31,13 @@ export class PostUtils {
 	}
 
 	viewComments() {
-		import('./interaction/CommentView.js').then(c => {
-			new c.CommentView(this.comments, this);
-		});
+		import('./interaction/CommentView.js')
+			.then(c => {
+				new c.CommentView(this.comments, this);
+			})
+			.catch(err => {
+				alert('there was error when launching comment view ' + err);
+			});
 	}
 
 	set commentCount(count) {

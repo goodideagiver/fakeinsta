@@ -1,7 +1,5 @@
 import { fetchCatPhoto, fetchPhoto } from './data/RandomPhoto.js';
 import { getRandomInt } from '../utility/Utility.js';
-import { CommentView } from './interaction/CommentView.js';
-
 export class PostUtils {
 	comments = [];
 	#username;
@@ -33,7 +31,9 @@ export class PostUtils {
 	}
 
 	viewComments() {
-		new CommentView(this.comments, this);
+		import('./interaction/CommentView.js').then(c => {
+			new c.CommentView(this.comments, this);
+		});
 	}
 
 	set commentCount(count) {

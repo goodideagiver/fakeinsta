@@ -5,6 +5,7 @@ export class CommentView {
 	constructor(commentArray, parentPostClass) {
 		// console.log(commentArray);
 		const comments = commentArray.map(comment => this.createCommentElement(comment));
+		this.post = parentPostClass;
 		this.createCommentViewElement(comments);
 		this.render();
 	}
@@ -42,6 +43,18 @@ export class CommentView {
 		this.commentViewEl
 			.querySelector('.back')
 			.addEventListener('click', this.close.bind(this));
+		this.commentViewEl.querySelector('.blue-button').addEventListener('click', e => {
+			const input = e.target.closest('.comment-interface');
+			const value = input.querySelector('input').value;
+			if (value.trim() > '') {
+				this.post.addComment('Visitor', value, 'https://picsum.photos/200');
+				const newComment = this.createCommentElement(
+					this.post.comments[this.post.comments.length - 1]
+				);
+				document.querySelector('.comments').append(newComment);
+				input.querySelector('input').value = '';
+			}
+		});
 	}
 
 	render() {

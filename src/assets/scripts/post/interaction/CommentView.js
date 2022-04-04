@@ -22,10 +22,16 @@ export class CommentView {
 		const commentViewTemplate = document
 			.getElementById('comment-view-template')
 			.content.cloneNode(true);
-		return commentViewTemplate;
+		this.commentViewEl = commentViewTemplate;
 	}
 
-	close() {}
+	close() {
+		this.commentViewEl.remove();
+		this.commentViewEl = null;
+	}
 
-	render() {}
+	render() {
+		const appHook = document.getElementById('app');
+		appHook.append(this.commentViewEl);
+	}
 }

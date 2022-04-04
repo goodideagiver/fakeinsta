@@ -28,6 +28,9 @@ export class PostUtils {
 
 	addComment(username, comment, imageURL) {
 		if (!username || !comment || !imageURL) {
+			throw new Error(
+				'Username, comment text, and profle image url is REQUIRED to add a comment to a post'
+			);
 			return;
 		}
 		this.comments.push({ username: username, text: comment, imgURL: imageURL });

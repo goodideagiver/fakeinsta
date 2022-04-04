@@ -1,8 +1,10 @@
 import { fetchCatPhoto, fetchPhoto } from './data/RandomPhoto.js';
 import { getRandomInt } from '../utility/Utility.js';
 export class PostUtils {
-	comments = [];
+	viewCommentsEl;
 	#username;
+	comments = [];
+
 	constructor(username, description = '', likes = 0) {
 		this.postTemplateEl = document
 			.getElementById('post-template')
@@ -20,13 +22,15 @@ export class PostUtils {
 		this.postTemplateEl
 			.querySelector('.comment')
 			.addEventListener('click', this.viewComments.bind(this));
-		this.postTemplateEl
-			.querySelector('.post-comments')
-			.addEventListener('click', this.viewComments.bind(this));
+		this.viewCommentsEl = this.postTemplateEl.querySelector('.post-comments');
+		this.viewCommentsEl.addEventListener('click', this.viewComments.bind(this));
 	}
 
-	addComment(username, comment) {
-		this.comments.push({ username: username, text: comment });
+	addComment(username, comment, imageURL) {
+		if (!username || !comment || !imageURL) {
+			return;
+		}
+		this.comments.push({ username: username, text: comment, imgURL: imageURL });
 		this.commentCount = this.comments.length;
 	}
 
@@ -43,7 +47,7 @@ export class PostUtils {
 	set commentCount(count) {
 		//updates comment count on feed view of the post
 		const commentString = count > 0 ? `<b>View ${count} comments</b>` : '';
-		this.postTemplateEl.querySelector('.post-comments').innerHTML = commentString;
+		this.viewCommentsEl.innerHTML = commentString;
 	}
 
 	set likeCount(likeAmount) {

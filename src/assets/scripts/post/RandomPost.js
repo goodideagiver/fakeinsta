@@ -8,6 +8,15 @@ export class RandomPost extends PostUtils {
 		super(getRandomName(), getRandomSentence(), getRandomInt(0, 1000000));
 	}
 
+	async addRandomComments() {
+		const commentCount = getRandomInt(1, 5);
+
+		for (let i = 0; i < commentCount; i++) {
+			const imageUrl = await this.fetchImage(40);
+			this.addComment(getRandomName(), getRandomSentence(), imageUrl);
+		}
+	}
+
 	async add() {
 		const postImageURL = await this.fetchImage(200);
 		const profileImageURL = await this.fetchImage(40);
@@ -15,6 +24,7 @@ export class RandomPost extends PostUtils {
 		this.postTemplateEl.querySelector('.post-photo img').src = postImageURL;
 		this.postTemplateEl.querySelector('.post-user-img img').src = profileImageURL;
 
+		await this.addRandomComments();
 		this.feedHook.append(this.postTemplateEl);
 	}
 }

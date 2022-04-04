@@ -1,5 +1,6 @@
 import { fetchCatPhoto, fetchPhoto } from './data/RandomPhoto.js';
 import { getRandomInt } from '../utility/Utility.js';
+import { CommentView } from './interaction/CommentView.js';
 
 export class PostUtils {
 	comments = [];
@@ -19,6 +20,12 @@ export class PostUtils {
 	addComment(username, comment) {
 		this.comments.push({ username: username, text: comment });
 	}
+
+	viewComments() {
+		new CommentView(this.comments, this);
+	}
+
+	renderCommentCount() {}
 
 	set likeCount(likeAmount) {
 		this.postTemplateEl.querySelector('.like-count span').textContent = likeAmount

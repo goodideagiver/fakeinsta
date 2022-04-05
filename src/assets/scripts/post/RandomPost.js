@@ -18,6 +18,9 @@ export class RandomPost extends PostUtils {
 	}
 
 	async add() {
+		const loading = import('./Loading.js');
+		const loadingEl = document.createElement('loading-element');
+		this.feedHook.appendChild(loadingEl);
 		const postImageURL = await this.fetchImage(200);
 		this.profileImageURL = await this.fetchImage(40);
 
@@ -26,6 +29,7 @@ export class RandomPost extends PostUtils {
 			this.profileImageURL;
 
 		await this.addRandomComments();
+		loadingEl.remove();
 		this.feedHook.append(this.postTemplateEl);
 	}
 }

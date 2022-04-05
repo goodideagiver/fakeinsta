@@ -23,6 +23,14 @@ class LoadingElement extends HTMLElement {
                         background-color: rgba(0, 0, 0, 0);
                     }
                 }
+                @keyframes bg-move {
+                    from {
+                        background-position: left;
+                    }
+                    to {
+                        background-position: right;
+                    }
+                }
 
                 
                 .loading-container {
@@ -31,7 +39,11 @@ class LoadingElement extends HTMLElement {
                     display: flex;
                     align-items: center;
                     justify-content: center;
-                    animation: fading 1.0s linear infinite;
+                    bac
+                     background: rgb(255,255,255);
+background: linear-gradient(90deg, rgba(255,255,255,1) 30%, rgba(231,231,231,1) 50%, rgba(255,255,255,1) 70%); 
+                    background-size: 600% 600%;
+                    animation: bg-move 1s linear infinite;
                 }
                 .loading-icon {
                     animation: spin 1.5s linear infinite;
@@ -39,8 +51,8 @@ class LoadingElement extends HTMLElement {
                     width: 100px;
                     border-radius: 50%;
                     border: 2px solid transparent;
-                    border-top: 2px solid #000;
-                    border-bottom: 2px solid #000;
+                    border-top: 2px solid gray;
+                    border-bottom: 2px solid gray;
                     display: flex;
                     justify-content: center;
                     align-items: center;

@@ -10,7 +10,7 @@ export class RandomPost extends PostUtils {
 
 	async addRandomComments() {
 		const commentCount = getRandomInt(1, 5);
-
+		this.addDescComment();
 		for (let i = 0; i < commentCount; i++) {
 			const imageUrl = await this.fetchImage(40);
 			this.addComment(getRandomName(), getRandomSentence(), imageUrl);

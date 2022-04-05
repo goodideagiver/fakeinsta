@@ -11,5 +11,6 @@ export class Post extends PostUtils {
 			this.postTemplateEl.querySelector('.post-photo img').src = this.image.href;
 		}
 		this.feedHook.prepend(this.postTemplateEl);
+		this.addDescComment();
 	}
 }

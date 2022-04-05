@@ -12,14 +12,10 @@ export class PostUtils {
 			.content.cloneNode(true);
 		this.username = username;
 
-		this.desc = description;
-		const pfp = this.profileImageURL
-			? this.profileImageURL
-			: 'https://picsum.photos/200';
 		this.likeCount = likes;
 		this.feedHook = document.getElementById('app-content');
 		this.#initButtons();
-		this.addComment(this.username, this.#desc, pfp);
+		this.desc = description;
 	}
 
 	#initButtons() {
@@ -101,7 +97,6 @@ export class PostUtils {
 
 			this.#desc = desc;
 			// console.log(this);
-			// this.addComment(this.username, desc, pfp);
 		} else {
 			// this.postTemplateEl.querySelector('.show-hide-btn-pos').remove();
 			this.postTemplateEl.querySelector('details').remove();
@@ -110,6 +105,13 @@ export class PostUtils {
 			usernameEl.textContent = this.username;
 			this.postTemplateEl.querySelector('.post-desc').append(usernameEl);
 		}
+	}
+
+	addDescComment() {
+		const pfp = this.profileImageURL
+			? this.profileImageURL
+			: 'https://picsum.photos/200';
+		this.addComment(this.username, this.#desc, pfp);
 	}
 
 	setDescSummary(desc) {

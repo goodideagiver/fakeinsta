@@ -28,7 +28,22 @@ export class PostUtils {
 			.addEventListener('click', this.viewComments.bind(this));
 		this.viewCommentsEl = this.postTemplateEl.querySelector('.post-comments');
 		this.viewCommentsEl.addEventListener('click', this.viewComments.bind(this));
+		this.postTemplateEl
+			.querySelector('button.like')
+			.addEventListener('click', this.likeButtonHandler.bind(this));
+		this.postTemplateEl
+			.querySelector('button.share')
+			.addEventListener('click', this.shareButtonHandler.bind(this));
+		this.postTemplateEl
+			.querySelector('button.save')
+			.addEventListener('click', this.saveButtonHandler.bind(this));
 	}
+
+	likeButtonHandler() {}
+
+	shareButtonHandler() {}
+
+	saveButtonHandler() {}
 
 	addComment(username, comment, imageURL) {
 		if (!username || !comment || !imageURL) {

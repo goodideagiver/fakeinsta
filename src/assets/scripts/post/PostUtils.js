@@ -4,6 +4,12 @@ export class PostUtils {
 	viewCommentsEl;
 	#username;
 	#desc;
+	#likeCount;
+	#userInteraction = {
+		saved: false,
+		liked: false,
+		likeElement: null,
+	};
 	comments = [];
 
 	constructor(username, description = '', likes = 0) {
@@ -33,9 +39,22 @@ export class PostUtils {
 		this.postTemplateEl
 			.querySelector('button.save')
 			.addEventListener('click', this.saveButtonHandler.bind(this));
+
+		this.#userInteraction.likeElement =
+			this.postTemplateEl.querySelector('.like-count span');
 	}
 
-	likeButtonHandler() {}
+	likeButtonHandler() {
+		if (!this.#userInteraction.liked) {
+			this.likeCount = this.#likeCount + 1;
+			console.log('dodano like', this.#likeCount);
+			this.#userInteraction.liked = true;
+		} else {
+			this.likeCount = this.#likeCount - 1;
+			console.log('odjęto like', this.#likeCount);
+			this.#userInteraction.liked = false;
+		}
+	}
 
 	shareButtonHandler() {}
 
@@ -72,9 +91,16 @@ export class PostUtils {
 	}
 
 	set likeCount(likeAmount) {
-		this.postTemplateEl.querySelector('.like-count span').textContent = likeAmount
-			.toString()
-			.replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
+		this.#likeCount = likeAmount;
+		try {
+			this.postTemplateEl.querySelector('.like-count span').textContent = likeAmount
+				.toString()
+				.replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
+		} catch {
+			this.#userInteraction.likeElement.textContent = likeAmount
+				.toString()
+				.replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
+		}
 	}
 
 	set username(username) {

@@ -11,5 +11,7 @@ Things I honed in my JS knowledge during this project:
 - using Parcel bundler
 - Organising project into separate files and modules
 
+...and I learned that DOM manipulation is super tedious when trying to create more advanced projects.
+
 Demo
 https://goodideagiver.github.io/fakeinsta/

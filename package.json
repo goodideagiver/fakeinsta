@@ -2,7 +2,6 @@
   "name": "fakeinsta",
   "version": "1.0.0",
   "description": "fake instagram OOP app",
-  "browserslist": "> 2.0%, last 2 versions, not dead",
   "scripts": {
     "start": "parcel src/index.html",
     "build": "rm -rf dist && parcel build src/index.html --no-source-maps",

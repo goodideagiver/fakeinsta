@@ -1,4 +1,4 @@
-import { urlArray } from './ImageUrlList';
+import { urlArray } from './imageListURL';
 
 export class Gallery {
 	#photoUrlArr;

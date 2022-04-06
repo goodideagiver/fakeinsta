@@ -1,16 +1,3 @@
-// export const populateUrlArray = async imageCount => {
-// 	const urlList = [];
-// 	for (let i = 0; i < imageCount; i++) {
-// 		urlList.push(new URL(`../../img/gallery-image (${i + 1}).avif`, import.meta.url));
-// 	}
-// 	return urlList;
-// };
-
-// export const testUrl = new URL(
-// 	'../../img/gallery/gallery-image (1).avif',
-// 	import.meta.url
-// );
-
 export const urlArray = [
 	new URL(
 		'../../img/gallery/gallery-image (1).avif?as=webp&width=250',

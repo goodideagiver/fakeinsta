@@ -7,7 +7,7 @@ export function unsupportedFunction() {
 	import('../components/Modal').then(() => {
 		const modal = document.createElement('fakeinsta-modal');
 		modal.textContent =
-			'This function is unsupported an probably will never be added.';
+			'This function is unsupported and probably will never be added.';
 		document.getElementById('app').prepend(modal);
 	});
 }

@@ -11,7 +11,9 @@ export class Gallery {
 			.getElementById('gallery-template')
 			.content.cloneNode(true);
 		const galleryGrid = galleryTemplate.querySelector('.gallery-grid');
+
 		this.addPhotosToGallery(this.createGalleryElementsArray(), galleryGrid);
+
 		return galleryTemplate;
 	}
 
@@ -28,8 +30,8 @@ export class Gallery {
 
 	pickPhoto(url) {
 		import('../pickPhoto/PickPhoto.js')
-			.then(p => {
-				new p.PickPhoto(url);
+			.then(photo => {
+				new photo.PickPhoto(url);
 				this.hide();
 			})
 			.catch(err => {
@@ -42,7 +44,7 @@ export class Gallery {
 		this.galleryEl = this.createGalleryElement();
 		this.galleryEl
 			.querySelector('button')
-			.addEventListener('click', () => this.hide());
+			.addEventListener('click', this.hide.bind(this));
 		document.getElementById('app').appendChild(this.galleryEl);
 		this.galleryEl = document.querySelector('.gallery');
 	}
@@ -58,17 +60,4 @@ export class Gallery {
 		});
 		return photoElements;
 	}
-
-	// async fetchImage(px = 150) {
-	// 	const resp = await fetch(`https://picsum.photos/${px}`);
-	// 	return resp.url;
-	// }
-
-	// async fetchGalleryPhotos() {
-	// 	const photos = [];
-	// 	for (let i = 0; i < 20; i++) {
-	// 		photos.push(await this.fetchImage(150));
-	// 	}
-	// 	return photos;
-	// }
 }

@@ -3,16 +3,20 @@ import { unsupportedFeatureAlert } from '../utility/utilityFunctions';
 //bottom nav handler class
 export class NavBottom {
 	constructor() {
-		this.nav = document.querySelector('.nav-bottom');
-		this.navItems = document.querySelectorAll('.nav-bottom>button');
-		this.handleClick();
+		this.#init();
+		this.#handleClick();
 	}
 
-	handleClick() {
-		this.nav.addEventListener('click', e => {
-			e.preventDefault();
-			e.stopPropagation();
-			const button = e.target.closest('button');
+	#init() {
+		this.nav = document.querySelector('.nav-bottom');
+		this.navItems = document.querySelectorAll('.nav-bottom>button');
+	}
+
+	#handleClick() {
+		this.nav.addEventListener('click', evt => {
+			evt.preventDefault();
+			evt.stopPropagation();
+			const button = evt.target.closest('button');
 			switch (button.id) {
 				case 'home-btn':
 					this.feedScrollTop();

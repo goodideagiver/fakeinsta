@@ -1,7 +1,7 @@
 import { RandomPost } from './post/RandomPost.js';
 import { Scroll } from './feed/Scroll.js';
-import { NavBottom } from './nav/navBottom.js';
-import { NavTop } from './nav/navTop.js';
+import { NavBottom } from './nav/NavBottom';
+import { NavTop } from './nav/NavTop';
 
 class App {
 	#fetchPostsOnLaunchAmount = 2;

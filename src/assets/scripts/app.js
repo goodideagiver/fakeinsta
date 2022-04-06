@@ -4,19 +4,21 @@ import { NavBottom } from './nav/navBottom.js';
 import { NavTop } from './nav/navTop.js';
 
 class App {
+	#fetchPostsOnLaunchAmount = 2;
+
 	constructor() {
 		this.addInitialPosts();
 		this.init();
 	}
 
 	init() {
-		const sc = new Scroll();
+		new Scroll();
 		new NavBottom();
 		new NavTop();
 	}
 
 	async addInitialPosts() {
-		for (let index = 0; index < 2; index++) {
+		for (let i = 0; i < this.#fetchPostsOnLaunchAmount; i++) {
 			await new RandomPost().add();
 		}
 	}

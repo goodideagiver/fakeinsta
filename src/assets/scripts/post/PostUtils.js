@@ -1,5 +1,5 @@
 import { fetchCatPhoto, fetchPhoto } from './data/RandomPhoto.js';
-import { getRandomInt, unsupportedFunction } from '../utility/Utility.js';
+import { getRandomInt, unsupportedFeatureAlert } from '../utility/utilityFunctions.js';
 export class PostUtils {
 	viewCommentsEl;
 	#username;
@@ -50,7 +50,7 @@ export class PostUtils {
 		this.postTemplateEl
 			.querySelector('.button-post-option')
 			.addEventListener('click', () => {
-				unsupportedFunction();
+				unsupportedFeatureAlert();
 			});
 	}
 

@@ -1,7 +1,7 @@
 import { getRandomName } from './data/Names.js';
 import { getRandomSentence } from './data/Desc.js';
 import { PostUtils } from './PostUtils.js';
-import { getRandomInt } from '../utility/Utility.js';
+import { getRandomInt } from '../utility/utilityFunctions.js';
 
 export class RandomPost extends PostUtils {
 	constructor() {

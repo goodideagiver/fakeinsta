@@ -1,4 +1,4 @@
-import { unsupportedFunction } from '../utility/Utility.js';
+import { unsupportedFeatureAlert } from '../utility/utilityFunctions.js';
 
 export class NavTop {
 	galleryObject;
@@ -24,7 +24,7 @@ export class NavTop {
 						this.galleryObject.initGallery();
 					}
 				default:
-					unsupportedFunction();
+					unsupportedFeatureAlert();
 					break;
 			}
 		}

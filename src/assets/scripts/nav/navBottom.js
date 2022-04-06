@@ -1,4 +1,4 @@
-import { unsupportedFunction } from '../utility/Utility';
+import { unsupportedFeatureAlert } from '../utility/utilityFunctions';
 
 //bottom nav handler class
 export class NavBottom {
@@ -19,7 +19,7 @@ export class NavBottom {
 					break;
 
 				default:
-					unsupportedFunction();
+					unsupportedFeatureAlert();
 					break;
 			}
 		});

@@ -2,13 +2,16 @@ import { unsupportedFeatureAlert } from '../utility/utilityFunctions.js';
 
 export class NavTop {
 	constructor() {
-		this.navHook = document.querySelector('.main-nav');
-		this.navItems = [...this.navHook.querySelectorAll('button')];
-
-		this.navHook.addEventListener('click', this.clickBtnHandler.bind(this));
+		this.#init();
+		this.navHook.addEventListener('click', this.#clickBtnHandler.bind(this));
 	}
 
-	clickBtnHandler(evt) {
+	#init() {
+		this.navHook = document.querySelector('.main-nav');
+		this.navItems = [...this.navHook.querySelectorAll('button')];
+	}
+
+	#clickBtnHandler(evt) {
 		evt.stopPropagation();
 		const button = evt.target.closest('button');
 		if (this.navItems.includes(button)) {

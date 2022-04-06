@@ -14,14 +14,17 @@ export class Modal extends HTMLElement {
 
 		this.attachShadow({ mode: 'open' });
 		this.initHTML();
+
 		this.shadowRoot
 			.querySelector('button')
 			.addEventListener('click', this.close.bind(this));
-		this.shadowRoot.querySelector('#backdrop').addEventListener('click', e => {
-			if (e.target.id === 'backdrop') {
-				this.close();
-			}
-		});
+
+		this.shadowRoot
+			.querySelector('#backdrop')
+			.addEventListener(
+				'click',
+				evt => evt.target.id === 'backdrop' && this.close()
+			);
 	}
 
 	initHTML() {

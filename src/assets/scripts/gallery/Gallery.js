@@ -53,9 +53,8 @@ export class Gallery {
 		const photoElements = this.#photoUrlArr.map(photoUrl => {
 			const photoEl = document.createElement('img');
 			photoEl.src = photoUrl.href;
-			photoEl.addEventListener('click', () => {
-				this.pickPhoto(photoUrl);
-			});
+			photoEl.addEventListener('click', () => this.pickPhoto(photoUrl));
+
 			return photoEl;
 		});
 		return photoElements;

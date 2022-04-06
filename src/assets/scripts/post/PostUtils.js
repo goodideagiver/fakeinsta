@@ -59,7 +59,22 @@ export class PostUtils {
 		this.toggleButtonFill(this.#userInteraction.likeBtn, this.#userInteraction.liked);
 	}
 
-	shareButtonHandler() {}
+	shareButtonHandler() {
+		try {
+			navigator.clipboard.writeText(this.postImageURL);
+			import('../components/Alert')
+				.then(al => {
+					const alert = document.createElement('fakeinsta-alert');
+					alert.textContent = 'Copied photo URL';
+					this.feedHook.prepend(alert);
+				})
+				.catch(err => {
+					alert(err);
+				});
+		} catch {
+			alert('There was an error when copying image url to clipboard');
+		}
+	}
 
 	saveButtonHandler() {
 		if (this.#userInteraction.saved) {

@@ -21,10 +21,10 @@ export class RandomPost extends PostUtils {
 		const loading = import('./Loading.js');
 		const loadingEl = document.createElement('loading-element');
 		this.feedHook.appendChild(loadingEl);
-		const postImageURL = await this.fetchImage(200);
+		this.postImageURL = await this.fetchImage(200);
 		this.profileImageURL = await this.fetchImage(40);
 
-		this.postTemplateEl.querySelector('.post-photo img').src = postImageURL;
+		this.postTemplateEl.querySelector('.post-photo img').src = this.postImageURL;
 		this.postTemplateEl.querySelector('.post-user-img img').src =
 			this.profileImageURL;
 

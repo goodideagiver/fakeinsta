@@ -8,7 +8,8 @@ export class Post extends PostUtils {
 	addToFeed() {
 		console.log('add post');
 		if (this.image) {
-			this.postTemplateEl.querySelector('.post-photo img').src = this.image.href;
+			this.postImageUrl = this.image.href;
+			this.postTemplateEl.querySelector('.post-photo img').src = this.#postImageUrl;
 		}
 		this.feedHook.prepend(this.postTemplateEl);
 		this.addDescComment();

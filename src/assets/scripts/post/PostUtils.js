@@ -47,11 +47,9 @@ export class PostUtils {
 	likeButtonHandler() {
 		if (!this.#userInteraction.liked) {
 			this.likeCount = this.#likeCount + 1;
-			console.log('dodano like', this.#likeCount);
 			this.#userInteraction.liked = true;
 		} else {
 			this.likeCount = this.#likeCount - 1;
-			console.log('odjęto like', this.#likeCount);
 			this.#userInteraction.liked = false;
 		}
 	}

@@ -36,7 +36,7 @@ export class PickPhoto {
 
 	postPhoto() {
 		const desc = this.pickPhotoEl.querySelector('textarea').value;
-		const postDesc = desc.trim() != '' ? desc : '';
+		const postDesc = desc.trim() != '' ? desc : undefined;
 		new Post('Visitor', postDesc, this.photoUrl).addToFeed();
 		this.hide();
 	}

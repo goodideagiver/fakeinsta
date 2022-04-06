@@ -13,7 +13,7 @@ export class PostUtils {
 	};
 	comments = [];
 
-	constructor(username, description = '', likes = 0) {
+	constructor(username, description = ' ', likes = 0) {
 		this.postTemplateEl = document
 			.getElementById('post-template')
 			.content.cloneNode(true);
@@ -166,12 +166,16 @@ export class PostUtils {
 			this.#desc = desc;
 			// console.log(this);
 		} else {
-			// this.postTemplateEl.querySelector('.show-hide-btn-pos').remove();
-			this.postTemplateEl.querySelector('details').remove();
-			const usernameEl = document.createElement('h2');
-			console.log(this.username);
-			usernameEl.textContent = this.username;
-			this.postTemplateEl.querySelector('.post-desc').append(usernameEl);
+			// this.postTemplateEl.querySelector('details').remove();
+			// const usernameEl = document.createElement('h2');
+			// console.log(this.username);
+			// usernameEl.textContent = this.username;
+			// this.postTemplateEl.querySelector('.post-desc').append(usernameEl);
+
+			this.addHideDescButton(descEl);
+			this.setDescSummary(desc);
+
+			this.#desc = ' ';
 		}
 	}
 

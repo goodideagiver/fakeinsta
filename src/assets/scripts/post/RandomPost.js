@@ -18,7 +18,7 @@ export class RandomPost extends PostUtils {
 	}
 
 	async add() {
-		const loading = import('./Loading.js');
+		const loading = import('../components/Loading.js');
 		const loadingEl = document.createElement('loading-element');
 		this.feedHook.appendChild(loadingEl);
 		this.postImageURL = await this.fetchImage(200);

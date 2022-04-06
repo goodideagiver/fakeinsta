@@ -1,9 +1,5 @@
-class LoadingElement extends HTMLElement {
-	constructor() {
-		super();
-		this.attachShadow({ mode: 'open' });
-		this.shadowRoot.innerHTML = `
-            <style>
+export const loadingStyle = `
+<style>
                 @keyframes spin {
                     from {
                         transform: rotate(0deg);
@@ -31,7 +27,6 @@ class LoadingElement extends HTMLElement {
                         background-position: right;
                     }
                 }
-
                 
                 .loading-container {
                     height: 100%;
@@ -58,21 +53,4 @@ background: linear-gradient(90deg, rgba(255,255,255,1) 30%, rgba(231,231,231,1) 
                     align-items: center;
                     margin: 0 auto;
                 }
-
-            </style>
-            <div class="loading-container">
-                <div class="loading-icon">
-                    <span class="material-icons">
-                        
-                    </span>
-                </div>
-            </div>
-    `;
-	}
-
-	connectedCallback() {
-		this.shadowRoot.querySelector('.loading-container').style.display = 'flex';
-	}
-}
-
-customElements.define('loading-element', LoadingElement);
+            </style>`;

@@ -4,7 +4,7 @@
   "description": "fake instagram OOP app",
   "browserslist": "> 2.0%, last 2 versions, not dead",
   "scripts": {
-    "start": "rm -rf dist && parcel src/index.html --no-hmr",
+    "start": "parcel src/index.html",
     "build": "rm -rf dist && parcel build src/index.html --no-source-maps",
     "predeploy": "rm -rf dist && parcel build src/index.html --no-source-maps --public-url .",
     "deploy": "gh-pages -d dist"

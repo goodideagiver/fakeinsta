@@ -6,7 +6,7 @@ export function getFeedHeight() {
 }
 
 export function getLastPostHeight() {
-	const lastPost = document.querySelector('.post:last-child');
+	const lastPost = document.querySelector('.post');
 	return lastPost.offsetHeight;
 }
 

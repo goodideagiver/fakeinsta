@@ -1,7 +1,5 @@
 //this class will launch comment view based on post class commment data
 export class CommentView {
-	#commentViewElement;
-
 	constructor(commentArray, parentPostClass) {
 		// console.log(commentArray);
 		const comments = commentArray.map(comment => this.createCommentElement(comment));

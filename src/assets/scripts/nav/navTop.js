@@ -1,3 +1,5 @@
+import { unsupportedFunction } from '../utility/Utility.js';
+
 export class NavTop {
 	galleryObject;
 	constructor() {
@@ -21,15 +23,8 @@ export class NavTop {
 					} else {
 						this.galleryObject.initGallery();
 					}
-					break;
-				case 1:
-					console.log('lajki');
-					break;
-				case 2:
-					console.log('messages');
-					break;
-
 				default:
+					unsupportedFunction();
 					break;
 			}
 		}

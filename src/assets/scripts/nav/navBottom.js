@@ -1,3 +1,5 @@
+import { unsupportedFunction } from '../utility/Utility';
+
 //bottom nav handler class
 export class NavBottom {
 	constructor() {
@@ -17,7 +19,7 @@ export class NavBottom {
 					break;
 
 				default:
-					console.log('clicked on nav button that is not implemented yet');
+					unsupportedFunction();
 					break;
 			}
 		});

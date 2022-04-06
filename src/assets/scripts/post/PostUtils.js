@@ -1,5 +1,5 @@
 import { fetchCatPhoto, fetchPhoto } from './data/RandomPhoto.js';
-import { getRandomInt } from '../utility/Utility.js';
+import { getRandomInt, unsupportedFunction } from '../utility/Utility.js';
 export class PostUtils {
 	viewCommentsEl;
 	#username;
@@ -46,6 +46,12 @@ export class PostUtils {
 		this.#userInteraction.saveElement =
 			this.postTemplateEl.querySelector('button.save');
 		this.#userInteraction.likeBtn = this.postTemplateEl.querySelector('button.like');
+
+		this.postTemplateEl
+			.querySelector('.button-post-option')
+			.addEventListener('click', () => {
+				unsupportedFunction();
+			});
 	}
 
 	likeButtonHandler() {

@@ -1,5 +1,5 @@
-import { getRandomName } from './data/Names.js';
-import { getRandomSentence } from './data/Desc.js';
+import { getRandomName } from './data/names';
+import { getRandomSentence } from './data/desc';
 import { PostUtils } from './PostUtils.js';
 import { getRandomInt } from '../utility/utilityFunctions.js';
 

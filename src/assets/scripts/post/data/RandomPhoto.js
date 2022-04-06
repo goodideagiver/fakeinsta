@@ -1,7 +1,4 @@
 //fetch with timeout
-
-import { async } from 'regenerator-runtime';
-
 export async function fetchCatPhoto(px) {
 	const getCatPhotoUrl = `https://api.thecatapi.com/v1/images/search?size=${px}`;
 	const response = await fetch(getCatPhotoUrl);

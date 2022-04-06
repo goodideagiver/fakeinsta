@@ -34,3 +34,48 @@ button {
 		color: adjust-color($color: blue, $saturation: 50%, $lightness: +20%, $alpha: 1);
 	}
 }
+
+.post {
+	button {
+		position: relative;
+		color: white;
+		cursor: pointer;
+		user-select: none;
+		text-align: center;
+		text-decoration: none;
+		cursor: pointer;
+		transition-duration: 0.4s;
+		-webkit-transition-duration: 0.4s; /* Safari */
+	}
+
+	button:after {
+		content: '';
+		display: block;
+		position: absolute;
+		border-radius: 50%;
+		left: 0;
+		top: 0;
+		width: 100%;
+		height: 100%;
+		opacity: 0;
+		transition: all 0.5s;
+		box-shadow: 0 0 10px 40px white;
+	}
+
+	// button[data-filled='true'] {
+	// 	background-color: black;
+	// }
+
+	button:active:after {
+		box-shadow: 0 0 0 0 white;
+		position: absolute;
+		left: 0;
+		top: 0;
+		opacity: 1;
+		transition: 0s;
+	}
+
+	button:active {
+		top: 1px;
+	}
+}

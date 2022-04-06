@@ -9,6 +9,7 @@ export class PostUtils {
 		saved: false,
 		liked: false,
 		likeElement: null,
+		saveElement: null,
 	};
 	comments = [];
 
@@ -42,6 +43,9 @@ export class PostUtils {
 
 		this.#userInteraction.likeElement =
 			this.postTemplateEl.querySelector('.like-count span');
+		this.#userInteraction.saveElement =
+			this.postTemplateEl.querySelector('button.save');
+		this.#userInteraction.likeBtn = this.postTemplateEl.querySelector('button.like');
 	}
 
 	likeButtonHandler() {
@@ -52,11 +56,36 @@ export class PostUtils {
 			this.likeCount = this.#likeCount - 1;
 			this.#userInteraction.liked = false;
 		}
+		this.toggleButtonFill(this.#userInteraction.likeBtn, this.#userInteraction.liked);
 	}
 
 	shareButtonHandler() {}
 
-	saveButtonHandler() {}
+	saveButtonHandler() {
+		if (this.#userInteraction.saved) {
+			this.#userInteraction.saved = false;
+		} else {
+			this.#userInteraction.saved = true;
+		}
+		this.toggleButtonFill(
+			this.#userInteraction.saveElement,
+			this.#userInteraction.saved
+		);
+	}
+
+	toggleButtonFill(button, condition) {
+		console.log(button);
+		const btnSpan = button.querySelector('span');
+		if (!condition) {
+			button.setAttribute('data-filled', 'false');
+			btnSpan.textContent = btnSpan.getAttribute('data-outline-icon');
+			console.log(btnSpan.getAttribute('data-outline-icon'));
+		} else {
+			button.setAttribute('data-filled', 'true');
+			btnSpan.textContent = btnSpan.getAttribute('data-filled-icon');
+			console.log(btnSpan.getAttribute('data-filled-icon'));
+		}
+	}
 
 	addComment(username, comment, imageURL) {
 		if (!username || !comment || !imageURL) {

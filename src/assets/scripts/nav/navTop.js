@@ -5,12 +5,12 @@ export class NavTop {
 		this.navHook = document.querySelector('.main-nav');
 		this.navItems = [...this.navHook.querySelectorAll('button')];
 
-		this.navHook.addEventListener('click', e => this.clickBtnHandler(e));
+		this.navHook.addEventListener('click', this.clickBtnHandler.bind(this));
 	}
 
-	clickBtnHandler(e) {
-		e.stopPropagation();
-		const button = e.target.closest('button');
+	clickBtnHandler(evt) {
+		evt.stopPropagation();
+		const button = evt.target.closest('button');
 		if (this.navItems.includes(button)) {
 			switch (this.navItems.indexOf(button)) {
 				case 0:

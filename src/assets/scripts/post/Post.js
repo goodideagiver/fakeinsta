@@ -6,7 +6,6 @@ export class Post extends PostUtils {
 	}
 
 	addToFeed() {
-		console.log('add post');
 		if (this.image) {
 			this.postImageUrl = this.image.href;
 			this.postTemplateEl.querySelector('.post-photo img').src = this.postImageUrl;

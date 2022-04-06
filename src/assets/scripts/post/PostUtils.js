@@ -1,7 +1,6 @@
 import { fetchCatPhoto, fetchPhoto } from './data/RandomPhoto.js';
 import { getRandomInt, unsupportedFeatureAlert } from '../utility/utilityFunctions.js';
 export class PostUtils {
-	viewCommentsEl;
 	#username;
 	#desc;
 	#likeCount;
@@ -11,6 +10,8 @@ export class PostUtils {
 		likeElement: null,
 		saveElement: null,
 	};
+	
+	viewCommentsEl;
 	comments = [];
 
 	constructor(username, description = ' ', likes = 0) {

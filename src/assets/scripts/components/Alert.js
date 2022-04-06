@@ -1,6 +1,7 @@
 import { alertStyle } from './defaultStyles/alertStyle';
 
 export class Alert extends HTMLElement {
+	#hideDelay = 500;
 	#alertWrapper;
 	#componentHTML = `
   <div id="alert-wrapper">
@@ -21,16 +22,14 @@ export class Alert extends HTMLElement {
 	connectedCallback() {
 		setTimeout(() => {
 			this.removeAlert();
-		}, 500);
+		}, this.#hideDelay);
 	}
 
 	removeAlert() {
 		setTimeout(() => {
 			this.#alertWrapper.style.opacity = '0';
-			this.#alertWrapper.addEventListener('transitionend', () => {
-				this.remove();
-			});
-		}, 500);
+			this.#alertWrapper.addEventListener('transitionend', this.remove);
+		}, this.#hideDelay);
 	}
 }
 

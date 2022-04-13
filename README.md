@@ -13,7 +13,7 @@ I wanted to practice OOP programming in JS and prove myself in that language, so
 
 ...and I learned that DOM manipulation is super tedious when trying to create more advanced projects.
 
- Working features:
+  Working features:
 - Add photo
 - Add comment
 - Add photo with description
